@@ -169,50 +169,87 @@ export default function Introduction() {
                                         initial={{ right: "-20%" }}
                                         animate={{ right: "110%" }}
                                         transition={{
+                                            duration: 8,
+                                            repeat: Infinity,
+                                            ease: "linear",
+                                            delay: bird.delay
+                                        }}
+                                    />
+                                ))}
+                            </div>
+                        )}
+
+                        {/* === Cat Animations (Mixed behavior: Yoda moves, Poky sits) === */}
+                        <div className="absolute bottom-[-2%] left-0 right-0 h-24 pointer-events-none">
+                            {/* Poky Cat (Stationary center) */}
+                            <div className="absolute inset-0 flex items-end justify-center">
+                                <img
+                                    src="/poky.gif"
+                                    alt="Poky Cat"
+                                    className="w-20 md:w-32 h-auto object-contain"
+                                />
+                            </div>
+                            {/* Yoda Cat (Moving across) */}
+                            <motion.img
+                                src="/yoda.gif"
+                                alt="Yoda Cat"
+                                className="absolute bottom-0 w-16 md:w-24 h-auto object-contain scale-x-[-1] will-change-transform"
+                                initial={{ left: "110%" }}
+                                animate={{ left: "-30%" }}
+                                transition={{
+                                    duration: 12,
+                                    repeat: Infinity,
+                                    ease: "linear",
+                                    delay: 0
+                                }}
+                            />
+                        </div>
                     </div>
+                    {/* Decorative Border */}
+                    <div className="absolute top-4 left-4 w-full h-full border border-wedding-gold/30 rounded-t-[10rem] -z-0" />
                 </div>
 
-                    {/* Text Side */}
-                    <motion.div
-                        style={{ y, opacity }}
-                        className="w-full md:w-1/2 text-center md:text-left space-y-8"
-                    >
-                        <div className="space-y-8">
-                            {/* First Paragraph (Removed) */}
+                {/* Text Side */}
+                <motion.div
+                    style={{ y, opacity }}
+                    className="w-full md:w-1/2 text-center md:text-left space-y-8"
+                >
+                    <div className="space-y-8">
+                        {/* First Paragraph (Removed) */}
 
-                            {/* Second Paragraph - Enhanced */}
-                            <div className="space-y-6">
-                                <div className="space-y-2">
-                                    <p className="font-serif text-3xl md:text-5xl text-wedding-gold leading-tight">
-                                        June 28, 2026
-                                    </p>
-                                    <p className="font-serif text-xl md:text-3xl leading-relaxed text-foreground/90 italic">
-                                        The day we become one, surrounded by those we love.
-                                    </p>
-                                </div>
+                        {/* Second Paragraph - Enhanced */}
+                        <div className="space-y-6">
+                            <div className="space-y-2">
+                                <p className="font-serif text-3xl md:text-5xl text-wedding-gold leading-tight">
+                                    June 28, 2026
+                                </p>
+                                <p className="font-serif text-xl md:text-3xl leading-relaxed text-foreground/90 italic">
+                                    The day we become one, surrounded by those we love.
+                                </p>
+                            </div>
 
-                                <div className="space-y-2">
-                                    <p className="font-arabic text-3xl md:text-5xl text-wedding-gold leading-tight text-right" dir="rtl">
-                                        ٢٨ يونيو ٢٠٢٦
-                                    </p>
-                                    <p className="font-arabic text-2xl md:text-3xl leading-relaxed text-foreground/90 text-right" dir="rtl">
-                                        اليوم الذي نصبح فيه واحداً، محاطين بمن نحب.
-                                    </p>
-                                </div>
+                            <div className="space-y-2">
+                                <p className="font-arabic text-3xl md:text-5xl text-wedding-gold leading-tight text-right" dir="rtl">
+                                    ٢٨ يونيو ٢٠٢٦
+                                </p>
+                                <p className="font-arabic text-2xl md:text-3xl leading-relaxed text-foreground/90 text-right" dir="rtl">
+                                    اليوم الذي نصبح فيه واحداً، محاطين بمن نحب.
+                                </p>
                             </div>
                         </div>
+                    </div>
 
-                        <div className="pt-8">
-                            <p className="font-script text-4xl md:text-6xl text-wedding-gold opacity-80">
-                                With Love,
-                            </p>
-                            <p className="font-arabic text-3xl md:text-4xl text-wedding-gold opacity-80 text-right mt-2">
-                                بكل الحب
-                            </p>
-                        </div>
-                    </motion.div>
-                </div>
+                    <div className="pt-8">
+                        <p className="font-script text-4xl md:text-6xl text-wedding-gold opacity-80">
+                            With Love,
+                        </p>
+                        <p className="font-arabic text-3xl md:text-4xl text-wedding-gold opacity-80 text-right mt-2">
+                            بكل الحب
+                        </p>
+                    </div>
+                </motion.div>
             </div>
+        </div>
         </section >
     );
 }
