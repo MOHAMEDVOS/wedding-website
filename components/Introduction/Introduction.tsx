@@ -93,33 +93,57 @@ export default function Introduction() {
                         {/* Bottom Left - Moved Inside */}
                         <motion.div
                             style={{ y: overlayY1, rotate: rotateZ }}
-                            className="absolute bottom-0 left-0 w-24 md:w-40 z-50 pointer-events-none md:drop-shadow-lg"
+                            animate={{ scale: [1, 1.05, 1], opacity: [0.85, 0.9, 0.85] }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                            className="absolute bottom-0 left-0 w-24 md:w-40 z-50 pointer-events-none"
                         >
-                            <img src="/Flowers Spring.gif" alt="" className="w-full h-full object-contain" />
+                            <img
+                                src="/Flowers Spring.gif"
+                                alt=""
+                                className="w-full h-full object-contain opacity-90 blur-[0.5px] drop-shadow-[0_6px_8px_rgba(60,40,20,0.25)]"
+                            />
                         </motion.div>
 
                         {/* Bottom Right - Moved Inside */}
                         <motion.div
                             style={{ y: overlayY2, rotate: -rotateZ }}
-                            className="absolute bottom-0 right-0 w-24 md:w-40 z-50 pointer-events-none md:drop-shadow-lg scale-x-[-1]"
+                            animate={{ scale: [1, 1.05, 1], opacity: [0.85, 0.9, 0.85] }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                            className="absolute bottom-0 right-0 w-24 md:w-40 z-50 pointer-events-none scale-x-[-1]"
                         >
-                            <img src="/Flowers Spring.gif" alt="" className="w-full h-full object-contain" />
+                            <img
+                                src="/Flowers Spring.gif"
+                                alt=""
+                                className="w-full h-full object-contain opacity-90 blur-[0.5px] drop-shadow-[0_6px_8px_rgba(60,40,20,0.25)]"
+                            />
                         </motion.div>
 
                         {/* Top Left - Moved down to Arch Shoulder */}
                         <motion.div
                             style={{ y: overlayY2, rotate: -rotateZ }}
-                            className="absolute top-24 left-0 w-24 md:w-32 z-50 pointer-events-none md:drop-shadow-lg -rotate-45"
+                            animate={{ scale: [1, 1.03, 1], opacity: [0.85, 0.9, 0.85] }}
+                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                            className="absolute top-24 left-0 w-24 md:w-32 z-50 pointer-events-none -rotate-45"
                         >
-                            <img src="/Flowers Spring.gif" alt="" className="w-full h-full object-contain" />
+                            <img
+                                src="/Flowers Spring.gif"
+                                alt=""
+                                className="w-full h-full object-contain opacity-85 blur-[0.5px] drop-shadow-[0_4px_6px_rgba(60,40,20,0.2)]"
+                            />
                         </motion.div>
 
                         {/* Top Right - Moved down to Arch Shoulder */}
                         <motion.div
                             style={{ y: overlayY1, rotate: rotateZ }}
-                            className="absolute top-24 right-0 w-24 md:w-32 z-50 pointer-events-none md:drop-shadow-lg rotate-45 scale-x-[-1]"
+                            animate={{ scale: [1, 1.03, 1], opacity: [0.85, 0.9, 0.85] }}
+                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                            className="absolute top-24 right-0 w-24 md:w-32 z-50 pointer-events-none rotate-45 scale-x-[-1]"
                         >
-                            <img src="/Flowers Spring.gif" alt="" className="w-full h-full object-contain" />
+                            <img
+                                src="/Flowers Spring.gif"
+                                alt=""
+                                className="w-full h-full object-contain opacity-85 blur-[0.5px] drop-shadow-[0_4px_6px_rgba(60,40,20,0.2)]"
+                            />
                         </motion.div>
 
                         {/* === Bird Animations (Confined) === */}

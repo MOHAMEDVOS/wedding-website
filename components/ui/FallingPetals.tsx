@@ -31,7 +31,7 @@ export default function FallingPetals() {
             id: i,
             x: Math.random() * 100, // percentage
             delay: Math.random() * 10,
-            duration: 15 + Math.random() * 20,
+            duration: 25 + Math.random() * 30,
             size: 4 + Math.random() * 10,
             rotation: Math.random() * 360,
         }));
