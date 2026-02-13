@@ -128,81 +128,49 @@ export default function Introduction() {
                         {/* Decorative Border */}
                         <div className="absolute top-4 left-4 w-full h-full border border-wedding-gold/30 rounded-t-[10rem] -z-0" />
 
-                        {/* === Bird Animations (Confined) === */}
-                        <div className="absolute inset-0 z-40 pointer-events-none overflow-hidden rounded-t-[10rem]">
-                            {/* group 1: bird-intro1.gif (Left to Right) */}
-                            {[
-                                { delay: 0, top: 12, size: "w-24 md:w-20", opacity: "opacity-100", visibility: "block" }, // Close (Visible on mobile)
-                                { delay: 3, top: 22, size: "w-12 md:w-10", opacity: "opacity-60", visibility: "hidden md:block" },    // Far (Hidden on mobile)
-                                { delay: 6, top: 17, size: "w-16 md:w-14", opacity: "opacity-85", visibility: "hidden md:block" }   // Mid (Hidden on mobile)
-                            ].map((bird, i) => (
-                                <motion.img
-                                    key={`bird1-${i}`}
-                                    src="/bird-intro1.gif"
-                                    alt=""
-                                    className={`absolute ${bird.size} ${bird.opacity} ${bird.visibility} h-auto object-contain will-change-transform`}
-                                    style={{ top: `${bird.top}%` }}
-                                    initial={{ left: "-20%" }}
-                                    animate={{ left: "110%" }}
-                                    transition={{
-                                        duration: 8,
-                                        repeat: Infinity,
-                                        ease: "linear",
-                                        delay: bird.delay
-                                    }}
-                                />
-                            ))}
-
-                            {/* group 2: bird-intro2.gif (Right to Left) */}
-                            {[
-                                { delay: 1.5, top: 15, size: "w-18 md:w-14", opacity: "opacity-90", visibility: "hidden md:block" }, // Mid (Hidden on mobile)
-                                { delay: 4.5, top: 25, size: "w-24 md:w-20", opacity: "opacity-100", visibility: "block" }, // Close (Visible on mobile)
-                                { delay: 7.5, top: 20, size: "w-12 md:w-9", opacity: "opacity-50", visibility: "hidden md:block" }    // Far (Hidden on mobile)
-                            ].map((bird, i) => (
-                                <motion.img
-                                    key={`bird2-${i}`}
-                                    src="/bird-intro2.gif"
-                                    alt=""
-                                    className={`absolute ${bird.size} ${bird.opacity} ${bird.visibility} h-auto object-contain scale-x-[-1] will-change-transform`}
-                                    style={{ top: `${bird.top}%` }}
-                                    initial={{ right: "-20%" }}
-                                    animate={{ right: "110%" }}
-                                    transition={{
-                                        duration: 8,
-                                        repeat: Infinity,
-                                        ease: "linear",
-                                        delay: bird.delay
-                                    }}
-                                />
-                            ))}
-
-                            {/* === Cat Animations (Mixed behavior: Yoda moves, Poky sits) === */}
-                            <div className="absolute bottom-[-2%] left-0 right-0 h-24 pointer-events-none">
-                                {/* Poky Cat (Stationary center) */}
-                                <div className="absolute inset-0 flex items-end justify-center">
-                                    <img
-                                        src="/poky.gif"
-                                        alt="Poky Cat"
-                                        className="w-20 md:w-32 h-auto object-contain"
+                        {/* === Bird Animations (Disabled on mobile for performance) === */}
+                        {!isMobile && (
+                            <div className="absolute inset-0 z-40 pointer-events-none overflow-hidden rounded-t-[10rem]">
+                                {/* group 1: bird-intro1.gif (Left to Right) */}
+                                {[
+                                    { delay: 0, top: 12, size: "w-20", opacity: "opacity-100" },
+                                    { delay: 3, top: 22, size: "w-10", opacity: "opacity-60" },
+                                    { delay: 6, top: 17, size: "w-14", opacity: "opacity-85" }
+                                ].map((bird, i) => (
+                                    <motion.img
+                                        key={`bird1-${i}`}
+                                        src="/bird-intro1.gif"
+                                        alt=""
+                                        className={`absolute ${bird.size} ${bird.opacity} h-auto object-contain will-change-transform`}
+                                        style={{ top: `${bird.top}%` }}
+                                        initial={{ left: "-20%" }}
+                                        animate={{ left: "110%" }}
+                                        transition={{
+                                            duration: 8,
+                                            repeat: Infinity,
+                                            ease: "linear",
+                                            delay: bird.delay
+                                        }}
                                     />
-                                </div>
-                                {/* Yoda Cat (Moving across) */}
-                                <motion.img
-                                    src="/yoda.gif"
-                                    alt="Yoda Cat"
-                                    className="absolute bottom-0 w-16 md:w-24 h-auto object-contain scale-x-[-1] will-change-transform"
-                                    initial={{ left: "110%" }}
-                                    animate={{ left: "-30%" }}
-                                    transition={{
-                                        duration: 12,
-                                        repeat: Infinity,
-                                        ease: "linear",
-                                        delay: 0
-                                    }}
-                                />
-                            </div>
-                        </div>
+                                ))}
+
+                                {/* group 2: bird-intro2.gif (Right to Left) */}
+                                {[
+                                    { delay: 1.5, top: 15, size: "w-14", opacity: "opacity-90" },
+                                    { delay: 4.5, top: 25, size: "w-20", opacity: "opacity-100" },
+                                    { delay: 7.5, top: 20, size: "w-9", opacity: "opacity-50" }
+                                ].map((bird, i) => (
+                                    <motion.img
+                                        key={`bird2-${i}`}
+                                        src="/bird-intro2.gif"
+                                        alt=""
+                                        className={`absolute ${bird.size} ${bird.opacity} h-auto object-contain scale-x-[-1] will-change-transform`}
+                                        style={{ top: `${bird.top}%` }}
+                                        initial={{ right: "-20%" }}
+                                        animate={{ right: "110%" }}
+                                        transition={{
                     </div>
+                </div>
 
                     {/* Text Side */}
                     <motion.div
@@ -245,6 +213,6 @@ export default function Introduction() {
                     </motion.div>
                 </div>
             </div>
-        </section>
+        </section >
     );
 }
