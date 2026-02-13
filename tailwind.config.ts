@@ -9,39 +9,53 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                background: "var(--background)",
-                foreground: "var(--foreground)",
+                background: "#1c261e", // Dark Olive
+                foreground: "#F6F2EC", // Ivory
                 border: "hsl(var(--border))",
                 input: "hsl(var(--input))",
-                ring: "hsl(var(--ring))",
+                ring: "#D4AF37", // Gold Ring
                 primary: {
-                    DEFAULT: "hsl(var(--primary))", // Gold
-                    foreground: "hsl(var(--primary-foreground))",
+                    DEFAULT: "#044d29", // Emerald
+                    foreground: "#F6F2EC",
                 },
                 secondary: {
-                    DEFAULT: "hsl(var(--secondary))",
-                    foreground: "hsl(var(--secondary-foreground))",
+                    DEFAULT: "#D4AF37", // Gold
+                    foreground: "#1c261e",
                 },
                 destructive: {
                     DEFAULT: "hsl(var(--destructive))",
                     foreground: "hsl(var(--destructive-foreground))",
                 },
                 muted: {
-                    DEFAULT: "hsl(var(--muted))",
-                    foreground: "hsl(var(--muted-foreground))",
+                    DEFAULT: "#2d3828", // Lighter Olive
+                    foreground: "#a3b19a", // Sage Grey
                 },
                 accent: {
-                    DEFAULT: "hsl(var(--accent))",
-                    foreground: "hsl(var(--accent-foreground))",
+                    DEFAULT: "#D4AF37",
+                    foreground: "#1c261e",
                 },
                 popover: {
-                    DEFAULT: "hsl(var(--popover))",
-                    foreground: "hsl(var(--popover-foreground))",
+                    DEFAULT: "#1c261e",
+                    foreground: "#F6F2EC",
                 },
                 card: {
-                    DEFAULT: "hsl(var(--card))",
-                    foreground: "hsl(var(--card-foreground))",
+                    DEFAULT: "#1c261e",
+                    foreground: "#F6F2EC",
                 },
+                wedding: {
+                    navy: "#1c261e", // Replaced Navy with Dark Olive for legacy compatibility
+                    emerald: "#044d29",
+                    gold: "#D4AF37",
+                    ivory: "#F6F2EC",
+                    charcoal: "#F6F2EC", // Replaced Charcoal with Ivory for text
+                    clay: "#B45309",
+                },
+            },
+            backgroundImage: {
+                'olive-gradient': 'linear-gradient(to bottom, #2d3828, #1a2118)',
+                'gold-lustre': 'linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c)',
+                'copper-lustre': 'linear-gradient(to right, #B45309, #d68a5c, #B45309)',
+                'velvet-emerald': 'radial-gradient(circle at center, #0a3d24 0%, #1c261e 100%)',
             },
             borderRadius: {
                 lg: "var(--radius)",
@@ -51,6 +65,9 @@ const config: Config = {
             fontFamily: {
                 serif: ["var(--font-cormorant)", "serif"],
                 sans: ["var(--font-inter)", "sans-serif"],
+                script: ["var(--font-pinyon)", "cursive"],
+                arabic: ["var(--font-amiri)", "serif"],
+                "great-victorian": ["var(--font-great-victorian)", "serif"],
             },
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",

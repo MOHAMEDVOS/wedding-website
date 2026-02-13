@@ -1,23 +1,48 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import SmoothScroll from "@/components/providers/smooth-scroll";
+import CustomCursor from "@/components/ui/CustomCursor";
+import Noise from "@/components/ui/Noise";
+import BackgroundMusic from "@/components/ui/BackgroundMusic";
+import FloatingNote from "@/components/ui/FloatingNote";
+import FallingPetals from "@/components/ui/FallingPetals";
 
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  variable: "--font-cormorant",
-  weight: ["300", "400", "500", "600", "700"],
+const milchella = localFont({
+  src: "../public/Milchella-Regular.ttf",
+  variable: "--font-milchella",
   display: "swap",
 });
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
+const scripalt = localFont({
+  src: "../public/SCRIPALT.ttf",
+  variable: "--font-scripalt",
+  display: "swap",
+});
+
+const greatVictorian = localFont({
+  src: "../public/great-victorian.standard.otf",
+  variable: "--font-great-victorian",
+  display: "swap",
+});
+
+// Alias other variables to milchella to ensure global coverage
+const cormorant = { variable: milchella.variable };
+const inter = { variable: milchella.variable };
+const pinyon = { variable: milchella.variable };
+
+import { Amiri } from "next/font/google"; // Import Arabic font
+
+const amiri = Amiri({
+  subsets: ["arabic"],
+  variable: "--font-amiri",
+  weight: ["400", "700"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Sarah & James | Wedding Invitation",
+  title: "Mohamed Ibrahim & Aya Samir | Wedding Invitation",
   description: "Join us in celebrating our wedding day. June 15, 2026.",
 };
 
@@ -31,11 +56,19 @@ export default function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          cormorant.variable,
-          inter.variable
+          milchella.variable,
+          scripalt.variable,
+          greatVictorian.variable,
+          amiri.variable
         )}
       >
-        {children}
+        <SmoothScroll>
+          {/* <FallingPetals /> */}
+          <CustomCursor />
+          <Noise />
+          {children}
+          <FloatingNote />
+        </SmoothScroll>
       </body>
     </html>
   );

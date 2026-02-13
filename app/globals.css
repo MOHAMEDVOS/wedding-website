@@ -4,34 +4,39 @@
 
 @layer base {
   :root {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
+    --background: 40 30% 97%;
+    /* #F6F2EC - Ivory */
+    --foreground: 210 20% 25%;
+    /* #36454F - Charcoal */
 
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card: 40 30% 97%;
+    --card-foreground: 210 20% 25%;
 
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 40 30% 97%;
+    --popover-foreground: 210 20% 25%;
 
-    --primary: 47 62% 52%;
-    /* Gold #d4af37 */
-    --primary-foreground: 0 0% 9%;
+    --primary: 150 90% 16%;
+    /* #044d29 - Emerald */
+    --primary-foreground: 40 30% 97%;
 
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 45 40% 90%;
+    --secondary-foreground: 150 90% 16%;
 
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
+    --muted: 45 20% 90%;
+    --muted-foreground: 210 10% 40%;
 
-    --accent: 47 62% 52%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 48 60% 50%;
+    /* #D4AF37 - Gold */
+    --accent-foreground: 210 20% 25%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 47 62% 52%;
+    --border: 45 20% 85%;
+    --input: 45 20% 85%;
+    --ring: 150 90% 16%;
+
+    --radius: 0.25rem;
   }
 }
 
@@ -41,7 +46,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-olive-gradient text-foreground min-h-screen selection:bg-wedding-gold/30;
   }
 }
 
