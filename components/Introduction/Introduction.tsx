@@ -185,7 +185,7 @@ export default function Introduction() {
                                 <motion.img
                                     src="/yoda.gif"
                                     alt="Yoda Cat"
-                                    className="absolute bottom-0 w-16 md:w-24 h-auto object-contain will-change-transform"
+                                    className="absolute bottom-0 w-16 md:w-24 h-auto object-contain scale-x-[-1] will-change-transform"
                                     style={{ left: 0 }}
                                     initial={{ x: "600%" }}
                                     animate={{ x: "-200%" }}
