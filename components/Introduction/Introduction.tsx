@@ -93,7 +93,7 @@ export default function Introduction() {
                             {/* Bottom Left */}
                             <motion.div
                                 style={{ y: overlayY1, rotate: rotateL1 }}
-                                className="absolute bottom-[-2%] left-[-5%] w-28 md:w-36 z-50 pointer-events-none origin-bottom-left"
+                                className="absolute bottom-[2%] left-[-2%] w-28 md:w-36 z-50 pointer-events-none origin-bottom-left"
                             >
                                 <img src="/Flowers Spring.gif" alt="" className="w-full h-full object-contain" />
                             </motion.div>
@@ -101,7 +101,7 @@ export default function Introduction() {
                             {/* Bottom Right */}
                             <motion.div
                                 style={{ y: overlayY2, rotate: rotateR1 }}
-                                className="absolute bottom-[-2%] right-[-5%] w-28 md:w-36 z-50 pointer-events-none scale-x-[-1] origin-bottom-right"
+                                className="absolute bottom-[2%] right-[-2%] w-28 md:w-36 z-50 pointer-events-none scale-x-[-1] origin-bottom-right"
                             >
                                 <img src="/Flowers Spring.gif" alt="" className="w-full h-full object-contain" />
                             </motion.div>
