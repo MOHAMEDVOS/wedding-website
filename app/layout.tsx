@@ -7,7 +7,6 @@ import CustomCursor from "@/components/ui/CustomCursor";
 import Noise from "@/components/ui/Noise";
 import BackgroundMusic from "@/components/ui/BackgroundMusic";
 import FloatingNote from "@/components/ui/FloatingNote";
-import FallingPetals from "@/components/ui/FallingPetals";
 
 const milchella = localFont({
   src: "../public/Milchella-Regular.ttf",
@@ -63,7 +62,6 @@ export default function RootLayout({
         )}
       >
         <SmoothScroll>
-          {/* <FallingPetals /> */}
           <CustomCursor />
           <Noise />
           {children}

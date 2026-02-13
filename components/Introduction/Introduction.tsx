@@ -3,9 +3,12 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import ImagePlaceholder from "../ui/ImagePlaceholder";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export default function Introduction() {
     const containerRef = useRef<HTMLDivElement>(null);
+    const isMobile = useMediaQuery('(max-width: 768px)');
+
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start end", "end start"]
@@ -14,11 +17,11 @@ export default function Introduction() {
     const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
     const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
-    // Parallax transforms for depth
-    const imageY = useTransform(scrollYProgress, [0, 1], [-50, 50]);
-    const overlayY1 = useTransform(scrollYProgress, [0, 1], [-20, 80]);
-    const overlayY2 = useTransform(scrollYProgress, [0, 1], [80, -20]);
-    const rotateZ = useTransform(scrollYProgress, [0, 1], [-5, 5]);
+    // Parallax transforms for depth - disabled on mobile for performance
+    const imageY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-50, 50]);
+    const overlayY1 = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-20, 80]);
+    const overlayY2 = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [80, -20]);
+    const rotateZ = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-5, 5]);
     const rotateL1 = useTransform(rotateZ, (v) => v + 15);
     const rotateR1 = useTransform(rotateZ, (v) => -v - 15);
     const rotateL2 = useTransform(rotateZ, (v) => -v + 60);
@@ -86,7 +89,7 @@ export default function Introduction() {
                                 src="/couple.jpg"
                                 alt="Mohamed & Aya"
                                 className="w-full h-full object-cover scale-110"
-                                style={{ y: imageY }}
+                                style={{ y: imageY, willChange: isMobile ? 'auto' : 'transform' }}
                             />
 
                             {/* === Floral Frame Overlays (High-end: flowers in, stems out) === */}
