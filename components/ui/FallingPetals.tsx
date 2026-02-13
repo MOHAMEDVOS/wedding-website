@@ -27,7 +27,7 @@ export default function FallingPetals() {
 
     // Generate static petal data on mount to avoid hydration mismatch
     const petals = useMemo(() => {
-        return Array.from({ length: 30 }, (_, i) => ({
+        return Array.from({ length: 20 }, (_, i) => ({
             id: i,
             x: Math.random() * 100, // percentage
             delay: Math.random() * 10,
@@ -80,6 +80,7 @@ function PetalItem({ petal, velocityValue }: { petal: Petal; velocityValue: any 
                 width: petal.size,
                 height: petal.size,
                 y: drift, // Reactive drift
+                willChange: "transform"
             }}
         >
             {/* Simple golden petal/sparkle shape */}
