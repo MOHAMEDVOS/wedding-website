@@ -85,11 +85,11 @@ export default function Introduction() {
                                 style={{ y: imageY }}
                             />
 
-                            {/* === Floral Frame Overlays (Moved Inside to stay within frame) === */}
+                            {/* === Floral Frame Overlays (Positioned inside the arch edges) === */}
                             {/* Bottom Left */}
                             <motion.div
                                 style={{ y: overlayY1, rotate: rotateZ }}
-                                className="absolute bottom-[-10%] left-[-10%] w-24 md:w-40 z-50 pointer-events-none"
+                                className="absolute bottom-0 left-0 w-24 md:w-36 z-50 pointer-events-none translate-x-[-15%] translate-y-[15%]"
                             >
                                 <img src="/Flowers Spring.gif" alt="" className="w-full h-full object-contain" />
                             </motion.div>
@@ -97,7 +97,7 @@ export default function Introduction() {
                             {/* Bottom Right */}
                             <motion.div
                                 style={{ y: overlayY2, rotate: -rotateZ }}
-                                className="absolute bottom-[-10%] right-[-10%] w-24 md:w-40 z-50 pointer-events-none scale-x-[-1]"
+                                className="absolute bottom-0 right-0 w-24 md:w-36 z-50 pointer-events-none scale-x-[-1] translate-x-[15%] translate-y-[15%]"
                             >
                                 <img src="/Flowers Spring.gif" alt="" className="w-full h-full object-contain" />
                             </motion.div>
@@ -105,7 +105,7 @@ export default function Introduction() {
                             {/* Top Left Shoulder */}
                             <motion.div
                                 style={{ y: overlayY2, rotate: -rotateZ }}
-                                className="absolute top-[15%] left-[-10%] w-24 md:w-32 z-50 pointer-events-none -rotate-45"
+                                className="absolute top-[20%] left-0 w-20 md:w-28 z-50 pointer-events-none -rotate-45 translate-x-[-20%]"
                             >
                                 <img src="/Flowers Spring.gif" alt="" className="w-full h-full object-contain" />
                             </motion.div>
@@ -113,7 +113,7 @@ export default function Introduction() {
                             {/* Top Right Shoulder */}
                             <motion.div
                                 style={{ y: overlayY1, rotate: rotateZ }}
-                                className="absolute top-[15%] right-[-10%] w-24 md:w-32 z-50 pointer-events-none rotate-45 scale-x-[-1]"
+                                className="absolute top-[20%] right-0 w-20 md:w-28 z-50 pointer-events-none rotate-45 scale-x-[-1] translate-x-[20%]"
                             >
                                 <img src="/Flowers Spring.gif" alt="" className="w-full h-full object-contain" />
                             </motion.div>
