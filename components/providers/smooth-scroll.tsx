@@ -7,13 +7,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function SmoothScroll({ children }: { children: ReactNode }) {
     useEffect(() => {
-        // Disable smooth scroll on mobile for performance
-        const isMobile = window.matchMedia('(max-width: 768px)').matches;
-
-        if (isMobile) {
-            return; // Skip smooth scroll on mobile
-        }
-
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
