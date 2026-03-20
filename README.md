@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <strong>An elegant bilingual (English/Arabic) digital wedding invitation with interactive animations</strong>
+  <strong>A bilingual (English/Arabic) digital wedding invitation with an animated envelope</strong>
 </p>
 
 <p align="center">
@@ -16,29 +16,29 @@
 
 ## ✨ Features
 
-- **🎨 Animated Envelope Opening** — Interactive wax-seal envelope that opens to reveal the invitation  
-- **🌐 Bilingual Support** — Full English and Arabic content with proper RTL layout  
-- **📸 Polaroid Photo Gallery** — Beautiful polaroid-style photo collage of the couple  
-- **💕 Love Story Timeline** — Animated timeline telling the couple's story  
-- **⏳ Live Countdown Timer** — Real-time countdown to the wedding day  
-- **📍 Venue with Google Maps** — Embedded interactive map to the venue  
-- **🎵 Background Music** — Ambient music that plays when the invitation is opened  
-- **💌 RSVP Integration** — One-click attendance confirmation  
-- **📱 Fully Responsive** — Beautiful on desktop, tablet, and mobile  
+- **🎨 Animated Envelope Opening** — A wax-seal envelope that opens when clicked to show the invite.
+- **🌐 Bilingual Support** — Full English and Arabic text with correct right-to-left layout.
+- **📸 Polaroid Photo Gallery** — A simple photo collage of the couple.
+- **💕 Love Story Timeline** — A scrollable timeline of our relationship.
+- **⏳ Live Countdown Timer** — Counts down the days until the wedding.
+- **📍 Venue with Google Maps** — Shows exactly where the venue is.
+- **🎵 Background Music** — Plays music automatically when the envelope opens.
+- **💌 RSVP Integration** — A form for guests to confirm attendance.
+- **📱 Phone-Friendly** — Looks good on desktop and mobile.
 
 ---
 
 ## 🖥️ Preview
 
-The invitation features a multi-section layout:
+The page is split into these sections:
 
-1. **Envelope Screen** — An animated envelope with wax seal that opens on click  
+1. **Envelope Screen** — Click to open  
 2. **Welcome Section** — Bismillah, couple names in both languages  
-3. **Photo Collage** — Polaroid-style photos with "Save Our Date" card  
-4. **Love Story** — Beautiful timeline of the couple's journey  
-5. **Countdown** — Live countdown to June 28, 2026  
-6. **Venue** — Location details with embedded Google Maps  
-7. **RSVP** — Elegant attendance confirmation  
+3. **Photo Collage** — Polaroid-style pictures 
+4. **Love Story** — A timeline of how we met
+5. **Countdown** — Time left until June 28, 2026  
+6. **Venue** — Location and map
+7. **RSVP** — Attendance form  
 
 ---
 
@@ -82,12 +82,12 @@ wedding-website/
 
 ---
 
-## 🎨 Design Highlights
+## 🎨 Design
 
-- **Elegant Typography** — Combination of serif and script fonts for a luxurious feel  
-- **Smooth Animations** — CSS transitions for envelope opening, section reveals, and timeline  
-- **Gold & Burgundy Palette** — Classic wedding color scheme  
-- **RTL Support** — Proper Arabic text rendering with Amiri font  
+- **Typography** — Mix of serif and script fonts for a classic look.
+- **Animations** — CSS handles the envelope opening, scrolling reveals, and the timeline.
+- **Colors** — Gold and burgundy.
+- **RTL Support** — Uses the Amiri font for proper Arabic rendering.  
 
 ---
 
