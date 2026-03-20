@@ -1,0 +1,1125 @@
+/* ===================================
+   Wedding Invitation - Luxury Design
+   Mohamed & Aya | محمد و آية
+   =================================== */
+
+/* ===================================
+   CSS Variables & Design System
+   =================================== */
+:root {
+    /* Color Palette - Burgundy & Cream Elegance */
+    --burgundy-primary: #6B1C23;
+    /* Deep Burgundy/Maroon */
+    --burgundy-dark: #4A0E13;
+    /* Darkest Burgundy */
+    --burgundy-light: #8B2C35;
+    /* Light Burgundy */
+    --rose: #C17B7F;
+    /* Dusty Rose */
+
+    /* Backgrounds - Cream & Beige */
+    --ivory: #F5EFE6;
+    /* Soft Ivory */
+    --ivory-soft: #FAF6F0;
+    /* Lightest Cream */
+    --cream: #E8DDD0;
+    /* Warm Cream */
+    --white: #FFFCF7;
+    /* Pure Off-White */
+    --beige: #D4C4B0;
+    /* Warm Beige */
+
+    /* Text Colors - Deep & Rich */
+    --text-dark: #2C1810;
+    /* Deep Brown/Black */
+    --text-medium: #5D4037;
+    /* Warm Brown */
+    --text-light: #8D7B68;
+    /* Muted Taupe */
+
+    /* Typography */
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Cormorant Garamond', serif;
+    --font-arabic: 'Amiri', serif;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+
+    /* Transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-slow: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ===================================
+   Reset & Base Styles
+   =================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-dark);
+    background: var(--ivory);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ===================================
+   Typography
+   =================================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+/* Arabic Text Optimization */
+[class*="-ar"],
+[class*="arabic"] {
+    font-family: var(--font-arabic);
+    direction: rtl;
+    letter-spacing: 0;
+    line-height: 1.8;
+}
+
+/* ===================================
+   Layout Utilities
+   =================================== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.section {
+    padding: var(--spacing-xl) 0;
+    position: relative;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ===================================
+   Envelope Opening Screen
+   =================================== */
+.envelope-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--ivory) 0%, var(--cream) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.envelope-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.envelope-container {
+    text-align: center;
+}
+
+.envelope-names {
+    margin-bottom: var(--spacing-lg);
+}
+
+.name-english {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--burgundy-primary);
+    letter-spacing: 0.1em;
+    margin-bottom: var(--spacing-xs);
+}
+
+.name-arabic {
+    font-family: var(--font-arabic);
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--text-medium);
+    direction: rtl;
+    letter-spacing: 0;
+    margin-bottom: var(--spacing-sm);
+}
+
+.envelope-date {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    color: var(--text-light);
+    letter-spacing: 0.2em;
+}
+
+/* Envelope Design */
+.envelope {
+    position: relative;
+    width: 320px;
+    height: 200px;
+    margin: 0 auto var(--spacing-md);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.envelope:hover {
+    transform: scale(1.05);
+}
+
+.envelope-body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #E8DCC4 0%, #D4C4A8 100%);
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border: none;
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #D4C4A8 0%, #C4B498 100%);
+    clip-path: polygon(0 0, 50% 50%, 100% 0);
+    transform-origin: top center;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 2;
+    border-top: none;
+}
+
+.envelope.opening .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+.wax-seal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, #8B0000 0%, #6B0000 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.4);
+    z-index: 3;
+}
+
+.seal-initials {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: #D4AF37;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.envelope-hint,
+.envelope-hint-ar {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-light);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.envelope-hint-ar {
+    font-family: var(--font-arabic);
+    direction: rtl;
+    letter-spacing: 0;
+    text-transform: none;
+    margin-top: var(--spacing-xs);
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ===================================
+   Welcome Section
+   =================================== */
+.welcome-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, var(--ivory) 0%, var(--cream) 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.welcome-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.welcome-section .container {
+    max-width: 800px;
+}
+
+/* Bismillah */
+.bismillah {
+    font-family: var(--font-arabic);
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--gold-dark);
+    direction: rtl;
+    letter-spacing: 0;
+    margin-bottom: var(--spacing-lg);
+    opacity: 0.9;
+}
+
+/* Arabic Names (Top) */
+.couple-names-arabic {
+    font-family: var(--font-arabic);
+    font-size: clamp(3rem, 8vw, 6rem);
+    color: var(--burgundy-primary);
+    direction: rtl;
+    letter-spacing: 0;
+    font-weight: 400;
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.2;
+}
+
+/* Divider Lines */
+.divider-line {
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--burgundy-primary), transparent);
+    margin: var(--spacing-md) auto;
+}
+
+/* Together with families text */
+.together-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    color: var(--rose);
+    font-weight: 400;
+    margin: var(--spacing-md) 0;
+}
+
+/* English Names (Script) */
+.couple-names-english {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3rem, 8vw, 6rem);
+    color: var(--burgundy-primary);
+    font-weight: 400;
+    margin: var(--spacing-lg) 0;
+    line-height: 1;
+}
+
+/* Invitation Text */
+.invitation-text {
+    font-family: var(--font-body);
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    color: var(--text-medium);
+    line-height: 1.8;
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.invitation-text-ar {
+    font-family: var(--font-arabic);
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    color: var(--text-light);
+    direction: rtl;
+    letter-spacing: 0;
+    line-height: 2;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ===================================
+   Section Headers
+   =================================== */
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--burgundy-primary);
+    letter-spacing: 0.05em;
+    margin-bottom: var(--spacing-sm);
+}
+
+.section-title-ar {
+    font-family: var(--font-arabic);
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    color: var(--text-medium);
+    direction: rtl;
+    letter-spacing: 0;
+}
+
+/* ===================================
+   Timeline Section
+   =================================== */
+.timeline-section {
+    background: linear-gradient(180deg, var(--ivory) 0%, var(--cream) 50%, var(--ivory) 100%);
+    overflow: hidden;
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-lg) 0;
+}
+
+/* Elegant Center Line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--burgundy-primary), transparent);
+    transform: translateX(-50%);
+    opacity: 0.3;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: var(--spacing-xxl, 6rem);
+    text-align: center;
+    width: 100%;
+}
+
+/* Delicate Marker */
+.timeline-marker {
+    position: absolute;
+    left: 50%;
+    top: 15px;
+    width: 12px;
+    height: 12px;
+    background: var(--burgundy-primary);
+    border: 2px solid var(--ivory);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    z-index: 2;
+    transition: all 0.5s ease;
+}
+
+.timeline-item:hover .timeline-marker {
+    background: var(--burgundy-dark);
+    transform: translateX(-50%) scale(1.2);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+}
+
+/* Content - No Borders/Boxes */
+.timeline-content {
+    background: transparent;
+    padding: 0 var(--spacing-md);
+    border-radius: 0;
+    margin-top: 0;
+    backdrop-filter: none;
+    border: none;
+    transition: var(--transition-smooth);
+    width: 45%;
+}
+
+/* Alternating Layout */
+.timeline-item:nth-child(odd) .timeline-content {
+    margin-left: auto;
+    /* Push to right */
+    text-align: left;
+    padding-left: var(--spacing-lg);
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    margin-right: auto;
+    /* Keep on left */
+    text-align: right;
+    padding-right: var(--spacing-lg);
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+    /* No shadow on hover for text-only look */
+}
+
+/* Titles in Romantic Script */
+.timeline-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--burgundy-primary);
+    font-weight: 400;
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.2;
+}
+
+.timeline-title-ar {
+    font-family: var(--font-arabic);
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    color: var(--burgundy-light);
+    direction: rtl;
+    letter-spacing: 0;
+    margin-bottom: var(--spacing-md);
+    opacity: 0.9;
+}
+
+.timeline-text {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-xs);
+}
+
+.timeline-text-ar {
+    font-family: var(--font-arabic);
+    font-size: clamp(1.2rem, 2.2vw, 1.4rem);
+    color: var(--text-medium);
+    direction: rtl;
+    letter-spacing: 0;
+    line-height: 1.8;
+}
+
+/* Responsive adjustment for center alignment on mobile */
+@media (max-width: 768px) {
+    .timeline::before {
+        display: none;
+        /* Hide line on very small screens for cleaner look? Or keep? Let's hide connection line for cleaner text flow */
+    }
+
+    .timeline-item {
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .timeline-marker {
+        display: none;
+        /* Remove markers on mobile for simple vertical flow */
+    }
+
+    .timeline-content {
+        width: 100%;
+        text-align: center !important;
+        padding: 0 !important;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+        margin: 0;
+    }
+}
+
+/* ===================================
+   Countdown Section
+   =================================== */
+.countdown-section {
+    background: linear-gradient(135deg, var(--ivory) 0%, var(--cream) 100%);
+    text-align: center;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-lg);
+}
+
+.countdown-item {
+    background: rgba(255, 255, 255, 0.6);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: 4px;
+    min-width: 120px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(107, 28, 35, 0.2);
+    transition: var(--transition-smooth);
+}
+
+.countdown-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--burgundy-primary);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.countdown-number {
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--burgundy-primary);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: var(--spacing-xs);
+}
+
+.countdown-label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+
+.countdown-label-ar {
+    display: block;
+    font-family: var(--font-arabic);
+    font-size: 1rem;
+    color: var(--text-light);
+    direction: rtl;
+    letter-spacing: 0;
+}
+
+.wedding-date-full {
+    margin-top: var(--spacing-lg);
+}
+
+.date-full-en,
+.date-full-ar {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: var(--text-dark);
+    letter-spacing: 0.1em;
+}
+
+.date-full-ar {
+    font-family: var(--font-arabic);
+    direction: rtl;
+    letter-spacing: 0;
+    margin-top: var(--spacing-xs);
+}
+
+/* ===================================
+   Venue Section
+   =================================== */
+.venue-section {
+    background: var(--ivory);
+}
+
+.venue-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+}
+
+.venue-info {
+    text-align: center;
+}
+
+.venue-name {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--burgundy-primary);
+    letter-spacing: 0.05em;
+    margin-bottom: var(--spacing-sm);
+}
+
+.venue-name-ar {
+    font-family: var(--font-arabic);
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    color: var(--text-medium);
+    direction: rtl;
+    letter-spacing: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+.venue-details,
+.venue-details-ar {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-sm);
+}
+
+.venue-details-ar {
+    font-family: var(--font-arabic);
+    direction: rtl;
+    letter-spacing: 0;
+}
+
+.venue-note,
+.venue-note-ar {
+    font-size: 1rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin-top: var(--spacing-md);
+}
+
+.venue-note-ar {
+    font-family: var(--font-arabic);
+    direction: rtl;
+    letter-spacing: 0;
+    font-style: normal;
+}
+
+.venue-map iframe {
+    width: 100%;
+    height: 400px;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* ===================================
+   RSVP Section
+   =================================== */
+.rsvp-section {
+    background: linear-gradient(135deg, var(--cream) 0%, var(--ivory) 100%);
+    text-align: center;
+}
+
+.rsvp-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.rsvp-message,
+.rsvp-message-ar {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--text-dark);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+}
+
+.rsvp-message-ar {
+    font-family: var(--font-arabic);
+    direction: rtl;
+    letter-spacing: 0;
+    line-height: 2;
+}
+
+.rsvp-button {
+    display: inline-block;
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-md) var(--spacing-xl);
+    background: var(--burgundy-primary);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+}
+
+.rsvp-button:hover {
+    background: var(--burgundy-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(107, 28, 35, 0.4);
+}
+
+.rsvp-button:active {
+    transform: translateY(-1px);
+}
+
+.rsvp-text-en {
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.rsvp-text-ar {
+    display: block;
+    font-family: var(--font-arabic);
+    font-size: 1rem;
+    letter-spacing: 0;
+}
+
+.rsvp-note,
+.rsvp-note-ar {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+.rsvp-note-ar {
+    font-family: var(--font-arabic);
+    direction: rtl;
+    letter-spacing: 0;
+    font-style: normal;
+    margin-top: var(--spacing-xs);
+}
+
+/* ===================================
+   Footer
+   =================================== */
+.footer {
+    background: var(--text-dark);
+    padding: var(--spacing-lg) 0;
+    text-align: center;
+}
+
+.footer-names {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: var(--burgundy-light);
+    letter-spacing: 0.1em;
+    margin-bottom: var(--spacing-xs);
+}
+
+.footer-names-ar {
+    font-family: var(--font-arabic);
+    font-size: clamp(1.3rem, 2.5vw, 2rem);
+    color: var(--rose);
+    direction: rtl;
+    letter-spacing: 0;
+    margin-bottom: var(--spacing-sm);
+}
+
+.footer-date {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+/* ===================================
+   Polaroid Photo Collage Section
+   =================================== */
+.polaroid-section {
+    background: linear-gradient(180deg, var(--ivory-soft) 0%, var(--white) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.polaroid-collage {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: 900px;
+    margin: 0 auto;
+}
+
+.polaroid {
+    position: absolute;
+    z-index: 3;
+    transition: transform 0.3s ease;
+}
+
+.polaroid:hover {
+    transform: scale(1.05) !important;
+    z-index: 10;
+}
+
+.polaroid-frame {
+    background: white;
+    padding: 15px 15px 50px 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+}
+
+.polaroid-img {
+    width: 220px;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+    background: var(--cream);
+}
+
+.polaroid-caption {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.3rem;
+    color: var(--text-dark);
+    text-align: center;
+    margin-top: 15px;
+}
+
+.polaroid-left {
+    top: 50px;
+    left: 0;
+    transform: rotate(-8deg);
+}
+
+.polaroid-right {
+    top: 80px;
+    right: 0;
+    transform: rotate(6deg);
+}
+
+.save-date-card {
+    position: absolute;
+    top: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ivory);
+    width: 350px;
+    padding: 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    z-index: 5;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.ticket-stub {
+    display: flex;
+    justify-content: space-between;
+    background: var(--cream);
+    padding: 8px 20px;
+    border-bottom: 2px dashed var(--beige);
+}
+
+.ticket-text {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    color: var(--text-light);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.save-date-content {
+    padding: 30px;
+    text-align: center;
+}
+
+.save-date-title {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    letter-spacing: 0.2em;
+    margin-bottom: 15px;
+}
+
+.save-date-number {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    color: var(--burgundy-primary);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+    line-height: 1;
+}
+
+.save-date-script {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2rem;
+    color: var(--text-medium);
+    margin: 0;
+}
+
+.envelope-pocket {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 300px;
+    background: linear-gradient(180deg, var(--burgundy-primary) 0%, var(--burgundy-dark) 100%);
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 -10px 40px rgba(107, 28, 35, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 4;
+}
+
+.envelope-text {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+}
+
+.couple-initials {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4rem;
+    color: var(--ivory);
+    letter-spacing: 0.1em;
+}
+
+.floral-decoration {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 1;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.floral-top-left {
+    top: 20px;
+    left: 20px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="60" cy="60" r="25" fill="%236B1C23" opacity="0.9"/><circle cx="50" cy="70" r="20" fill="%238B2C35"/><circle cx="70" cy="75" r="18" fill="%23C17B7F"/><circle cx="45" cy="85" r="15" fill="%236B1C23" opacity="0.8"/><circle cx="80" cy="65" r="22" fill="%238B2C35" opacity="0.9"/><circle cx="65" cy="90" r="16" fill="%23F5EFE6"/><circle cx="35" cy="75" r="12" fill="%23C17B7F"/><ellipse cx="60" cy="75" rx="8" ry="15" fill="%234A0E13" opacity="0.6"/><ellipse cx="55" cy="70" rx="6" ry="12" fill="%234A0E13" opacity="0.5"/></svg>');
+}
+
+.floral-top-right {
+    top: 0;
+    right: 160px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="50" r="28" fill="%238B2C35" opacity="0.9"/><circle cx="90" cy="60" r="22" fill="%236B1C23"/><circle cx="110" cy="65" r="20" fill="%23C17B7F"/><circle cx="85" cy="75" r="18" fill="%238B2C35" opacity="0.8"/><circle cx="115" cy="55" r="24" fill="%236B1C23" opacity="0.9"/><circle cx="100" cy="80" r="16" fill="%23F5EFE6"/><circle cx="75" cy="65" r="14" fill="%23C17B7F"/><ellipse cx="100" cy="65" rx="10" ry="18" fill="%234A0E13" opacity="0.6"/></svg>');
+}
+
+.floral-bottom-left {
+    bottom: 320px;
+    left: 10px;
+    width: 250px;
+    height: 250px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><circle cx="80" cy="150" r="35" fill="%236B1C23" opacity="0.95"/><circle cx="65" cy="165" r="30" fill="%238B2C35"/><circle cx="95" cy="170" r="28" fill="%23C17B7F"/><circle cx="55" cy="185" r="25" fill="%236B1C23" opacity="0.85"/><circle cx="110" cy="160" r="32" fill="%238B2C35" opacity="0.9"/><circle cx="80" cy="195" r="22" fill="%23F5EFE6"/><circle cx="40" cy="170" r="20" fill="%23C17B7F"/><circle cx="100" cy="185" r="24" fill="%238B2C35"/><circle cx="70" cy="140" r="18" fill="%23C17B7F" opacity="0.9"/><ellipse cx="80" cy="170" rx="12" ry="25" fill="%234A0E13" opacity="0.6"/><ellipse cx="70" cy="160" rx="10" ry="20" fill="%234A0E13" opacity="0.5"/><circle cx="50" cy="155" r="15" fill="%23F5EFE6" opacity="0.8"/></svg>');
+}
+
+.floral-bottom-right {
+    bottom: 340px;
+    right: 30px;
+    width: 230px;
+    height: 230px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 230"><circle cx="130" cy="140" r="32" fill="%238B2C35" opacity="0.95"/><circle cx="115" cy="155" r="28" fill="%236B1C23"/><circle cx="145" cy="160" r="26" fill="%23C17B7F"/><circle cx="105" cy="175" r="24" fill="%238B2C35" opacity="0.85"/><circle cx="155" cy="145" r="30" fill="%236B1C23" opacity="0.9"/><circle cx="130" cy="185" r="20" fill="%23F5EFE6"/><circle cx="95" cy="160" r="18" fill="%23C17B7F"/><circle cx="150" cy="175" r="22" fill="%236B1C23"/><circle cx="120" cy="130" r="16" fill="%23C17B7F" opacity="0.9"/><ellipse cx="130" cy="160" rx="11" ry="23" fill="%234A0E13" opacity="0.6"/><ellipse cx="120" cy="150" rx="9" ry="18" fill="%234A0E13" opacity="0.5"/><circle cx="140" cy="170" r="14" fill="%23F5EFE6" opacity="0.8"/></svg>');
+}
+
+/* ===================================
+   Responsive Design
+   =================================== */
+@media (max-width: 768px) {
+    :root {
+        --spacing-lg: 3rem;
+        --spacing-xl: 4rem;
+    }
+
+    .envelope {
+        width: 280px;
+        height: 175px;
+    }
+
+    .wax-seal {
+        width: 50px;
+        height: 50px;
+    }
+
+    .seal-initials {
+        font-size: 1rem;
+    }
+
+    .couple-names {
+        display: block;
+    }
+
+    .groom-name,
+    .bride-name {
+        display: block;
+        margin: var(--spacing-md) 0;
+    }
+
+    .ampersand {
+        display: block;
+        margin: var(--spacing-sm) 0;
+    }
+
+    .venue-content {
+        grid-template-columns: 1fr;
+    }
+
+    .venue-map iframe {
+        height: 300px;
+    }
+
+    .countdown {
+        gap: var(--spacing-sm);
+    }
+
+    .countdown-item {
+        min-width: 100px;
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .countdown {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .rsvp-button {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 1rem;
+    }
+
+    /* Polaroid Section Mobile */
+    .polaroid-collage {
+        height: 700px;
+    }
+
+    .polaroid-left,
+    .polaroid-right {
+        transform: scale(0.8) rotate(-5deg);
+    }
+
+    .polaroid-left {
+        left: -20px;
+    }
+
+    .polaroid-right {
+        right: -20px;
+    }
+
+    .save-date-card {
+        width: 280px;
+        top: 250px;
+    }
+
+    .save-date-number {
+        font-size: 2.5rem;
+    }
+
+    .envelope-pocket {
+        width: 100%;
+        height: 250px;
+    }
+
+    .floral-decoration {
+        width: 100px;
+        height: 100px;
+    }
+
+    .floral-bottom-left,
+    .floral-bottom-right {
+        bottom: 260px;
+    }
+}
