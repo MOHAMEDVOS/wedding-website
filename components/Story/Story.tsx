@@ -191,10 +191,10 @@ export default function Story() {
                                 item.alignment === "right" ? "text-right" : "text-left"
                             )}>
                                 <div className="flex flex-col gap-0 mb-4">
-                                    <span className="text-wedding-gold font-great-victorian text-3xl md:text-6xl opacity-30 block">
+                                    <span className="text-wedding-gold font-great-victorian text-3xl md:text-6xl opacity-90 block">
                                         {item.year}
                                     </span>
-                                    <span className="text-wedding-gold font-amiri text-2xl md:text-4xl opacity-30 block">
+                                    <span className="text-wedding-gold font-amiri text-2xl md:text-4xl opacity-80 block">
                                         {item.yearAr}
                                     </span>
                                 </div>
