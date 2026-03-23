@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useRef } from "react";
 
 export default function Location() {
@@ -61,8 +61,8 @@ export default function Location() {
                         className="text-center md:text-left space-y-8 p-8 md:p-10 rounded-xl bg-white/[0.03] backdrop-blur-sm border border-wedding-gold/10 shadow-[0_20px_50px_rgba(0,0,0,0.2),0_0_40px_rgba(212,175,55,0.04)]"
                     >
                         <div className="space-y-4">
-                            <h3 className="font-serif text-3xl md:text-4xl text-foreground">Fleet Club El Gezirah</h3>
-                            <h3 className="font-arabic text-2xl md:text-3xl text-foreground">فليت كلوب الجزيرة</h3>
+                            <h3 className="font-serif text-3xl md:text-4xl text-foreground">Fleet Club El Zamalk</h3>
+                            <h3 className="font-arabic text-2xl md:text-3xl text-foreground">فليت كلوب الزمالك</h3>
                         </div>
 
                         <div className="w-12 h-[1px] bg-gradient-to-r from-wedding-gold/40 to-transparent mx-auto md:mx-0" />
