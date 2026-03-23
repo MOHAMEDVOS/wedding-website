@@ -15,7 +15,7 @@ const storyItems = [
         description: "Welcome drinks and gathering at the venue.",
         descriptionAr: "مشروبات ترحيبية واستقبال الضيوف في القاعة.",
         alignment: "right",
-        image: "/Guest Gathering.jpg",
+        image: "/Guest Gathering.png",
     },
     {
         year: "7:30 PM",
@@ -168,7 +168,7 @@ export default function Story() {
                             )}
                         >
                             {/* Image Side — Glassmorphic floating card */}
-                            <div className="story-image w-1/2 aspect-[4/3] relative overflow-hidden rounded-lg bg-white/[0.03] backdrop-blur-sm shadow-[0_20px_50px_rgba(0,0,0,0.25),0_0_40px_rgba(212,175,55,0.06)]">
+                            <div className="story-image w-1/2 aspect-[3/4] relative overflow-hidden rounded-lg bg-white/[0.03] backdrop-blur-sm shadow-[0_20px_50px_rgba(0,0,0,0.25),0_0_40px_rgba(212,175,55,0.06)]">
                                 <div className="story-image-inner w-full h-full relative p-1 md:p-2 border border-wedding-gold/15 rounded-lg">
                                     {item.image ? (
                                         <img
