@@ -158,17 +158,17 @@ export default function Story() {
                     <div ref={lineRef} className="w-full bg-gradient-to-b from-wedding-gold/0 via-wedding-gold to-wedding-gold/0 absolute top-0 left-0" />
                 </div>
 
-                <div className="space-y-40 relative z-10">
+                <div className="space-y-24 md:space-y-40 relative z-10">
                     {storyItems.map((item, index) => (
                         <div
                             key={index}
                             className={cn(
-                                "story-item flex items-center gap-6 md:gap-20",
-                                item.alignment === "right" ? "flex-row-reverse" : "flex-row"
+                                "story-item flex flex-col md:flex-row items-center gap-8 md:gap-20",
+                                item.alignment === "right" ? "md:flex-row-reverse" : "md:flex-row"
                             )}
                         >
                             {/* Image Side — Glassmorphic floating card */}
-                            <div className="story-image w-1/2 aspect-[4/3] relative overflow-hidden rounded-lg bg-white/[0.03] backdrop-blur-sm shadow-[0_20px_50px_rgba(0,0,0,0.25),0_0_40px_rgba(212,175,55,0.06)]">
+                            <div className="story-image w-full md:w-1/2 aspect-[4/3] relative overflow-hidden rounded-lg bg-white/[0.03] backdrop-blur-sm shadow-[0_20px_50px_rgba(0,0,0,0.25),0_0_40px_rgba(212,175,55,0.06)]">
                                 <div className="story-image-inner w-full h-full relative p-1 md:p-2 border border-wedding-gold/15 rounded-lg">
                                     {item.image ? (
                                         <img
@@ -187,8 +187,8 @@ export default function Story() {
 
                             {/* Content Side */}
                             <div className={cn(
-                                "story-content w-1/2",
-                                item.alignment === "right" ? "text-right" : "text-left"
+                                "story-content w-full md:w-1/2 text-center",
+                                item.alignment === "right" ? "md:text-right" : "md:text-left"
                             )}>
                                 <div className="flex flex-col gap-0 mb-4">
                                     <span className="text-wedding-gold font-great-victorian text-3xl md:text-6xl opacity-90 block">
