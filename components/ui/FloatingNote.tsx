@@ -8,6 +8,7 @@ import { X, Send } from "lucide-react";
 export default function FloatingNote() {
     const [isOpen, setIsOpen] = useState(false);
     const [song, setSong] = useState("");
+    const [name, setName] = useState("");
 
     // Golden Sparkles Logic (Matching ScrollFairy)
     const [sparkles, setSparkles] = useState<{ id: number; left: string; top: string; size: number; delay: number; duration: number; xOffset: number; yOffset: number; }[]>([]);
@@ -26,13 +27,33 @@ export default function FloatingNote() {
         setSparkles(generatedSparkles);
     }, []);
 
-    const handleSend = (e: React.FormEvent) => {
+    const [sending, setSending] = useState(false);
+    const [sent, setSent] = useState(false);
+
+    const handleSend = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (song.trim()) {
-            console.log("Song request:", song);
-            // In a real app, send to API here
-            setSong("");
-            setIsOpen(false);
+        if (!song.trim() || sending) return;
+
+        setSending(true);
+        try {
+            const res = await fetch("/api/songs", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ song: song.trim(), name: name.trim() || "Anonymous" }),
+            });
+            if (res.ok) {
+                setSent(true);
+                setSong("");
+                setName("");
+                setTimeout(() => {
+                    setIsOpen(false);
+                    setSent(false);
+                }, 1500);
+            }
+        } catch {
+            // silently fail
+        } finally {
+            setSending(false);
         }
     };
 
@@ -179,8 +200,18 @@ export default function FloatingNote() {
 
                                         {/* Form Content */}
                                         <div className="relative z-10 w-full flex flex-col items-center">
-                                            {/* (Heading Removed as requested) */}
-
+                                            {sent ? (
+                                                <motion.div
+                                                    initial={{ opacity: 0, scale: 0.8 }}
+                                                    animate={{ opacity: 1, scale: 1 }}
+                                                    className="flex flex-col items-center space-y-4 py-8"
+                                                >
+                                                    <span className="text-4xl">✨</span>
+                                                    <p className="font-scripalt text-[#4b2e1f] text-xl italic">Thank you!</p>
+                                                    <p className="font-amiri text-[#4b2e1f] text-lg">!شكراً ليك</p>
+                                                </motion.div>
+                                            ) : (
+                                            <>
                                             {/* Form Body */}
                                             <form
                                                 onSubmit={handleSend}
@@ -195,7 +226,17 @@ export default function FloatingNote() {
                                                     </h3>
                                                 </div>
 
-                                                <div className="w-full max-w-[260px] space-y-10 flex flex-col items-center">
+                                                <div className="w-full max-w-[260px] space-y-6 flex flex-col items-center">
+                                                    <div className="w-full relative">
+                                                        <input
+                                                            type="text"
+                                                            value={name}
+                                                            onChange={(e) => setName(e.target.value)}
+                                                            placeholder="Your name... / اسمك..."
+                                                            className="w-full bg-transparent border-b-2 border-[#4b2e1f]/20 focus:border-[#4b2e1f]/40 outline-none text-[#4b2e1f] font-scripalt text-lg py-2 px-1 text-center transition-colors placeholder:text-[#4b2e1f]/30 italic"
+                                                            disabled={sending}
+                                                        />
+                                                    </div>
                                                     <div className="w-full relative">
                                                         <input
                                                             type="text"
@@ -204,16 +245,20 @@ export default function FloatingNote() {
                                                             placeholder="Your song... / أغنيتك المفضلة..."
                                                             className="w-full bg-transparent border-b-2 border-[#4b2e1f]/20 focus:border-[#4b2e1f]/40 outline-none text-[#4b2e1f] font-scripalt text-xl py-2 px-1 text-center transition-colors placeholder:text-[#4b2e1f]/30 italic"
                                                             required
+                                                            disabled={sending}
                                                         />
                                                     </div>
 
                                                     {/* Wax Seal Submit Button */}
                                                     <button
                                                         type="submit"
-                                                        className="relative group transition-transform hover:scale-105 active:scale-95 mb-4"
+                                                        disabled={sending}
+                                                        className="relative group transition-transform hover:scale-105 active:scale-95 mb-4 disabled:opacity-60"
                                                     >
                                                         <div className="absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                            <span className="font-scripalt text-[#4b2e1f]/60 text-xs italic tracking-widest uppercase">Seal Your Answer</span>
+                                                            <span className="font-scripalt text-[#4b2e1f]/60 text-xs italic tracking-widest uppercase">
+                                                                {sending ? "Sending..." : "Seal Your Answer"}
+                                                            </span>
                                                         </div>
 
                                                         {/* Wax Seal Shape */}
@@ -232,6 +277,8 @@ export default function FloatingNote() {
 
                                             {/* Footer Decorative Line */}
                                             <div className="w-32 h-[1px] bg-[#4b2e1f]/10 mt-12" />
+                                            </>
+                                            )}
                                         </div>
                                     </div>
                                 </motion.div>
