@@ -14,10 +14,9 @@ export default function Introduction() {
         offset: ["start end", "end start"]
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-    const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-
-    // Parallax transforms for depth - disabled on mobile for performance
+    // All scroll-linked transforms disabled on mobile for performance
+    const y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [100, -100]);
+    const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], isMobile ? [1, 1, 1, 1] : [0, 1, 1, 0]);
     const imageY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-50, 50]);
     const overlayY1 = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-20, 80]);
     const overlayY2 = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [80, -20]);
@@ -119,11 +118,12 @@ export default function Introduction() {
                                 style={{ y: imageY, willChange: isMobile ? 'auto' : 'transform' }}
                             />
 
-                            {/* === Floral Frame Overlays (High-end: flowers in, stems out) === */}
+                            {/* === Floral Frame Overlays — hidden on mobile for performance === */}
+                            {!isMobile && <>
                             {/* Bottom Left */}
                             <motion.div
                                 style={{ y: overlayY1, rotate: rotateL1 }}
-                                className="absolute bottom-[2%] left-[-2%] w-28 md:w-36 z-50 pointer-events-none origin-bottom-left"
+                                className="absolute bottom-[2%] left-[-2%] w-36 z-50 pointer-events-none origin-bottom-left"
                             >
                                 <img src="/Flowers Spring.gif" alt="" className="w-full h-full object-contain" />
                             </motion.div>
@@ -131,7 +131,7 @@ export default function Introduction() {
                             {/* Bottom Right */}
                             <motion.div
                                 style={{ y: overlayY2, rotate: rotateR1 }}
-                                className="absolute bottom-[2%] right-[-2%] w-28 md:w-36 z-50 pointer-events-none scale-x-[-1] origin-bottom-right"
+                                className="absolute bottom-[2%] right-[-2%] w-36 z-50 pointer-events-none scale-x-[-1] origin-bottom-right"
                             >
                                 <img src="/Flowers Spring.gif" alt="" className="w-full h-full object-contain" />
                             </motion.div>
@@ -139,7 +139,7 @@ export default function Introduction() {
                             {/* Top Left Shoulder */}
                             <motion.div
                                 style={{ y: overlayY2, rotate: rotateL2 }}
-                                className="absolute top-[12%] left-[-5%] w-24 md:w-32 z-50 pointer-events-none origin-center"
+                                className="absolute top-[12%] left-[-5%] w-32 z-50 pointer-events-none origin-center"
                             >
                                 <img src="/Flowers Spring.gif" alt="" className="w-full h-full object-contain" />
                             </motion.div>
@@ -147,10 +147,11 @@ export default function Introduction() {
                             {/* Top Right Shoulder */}
                             <motion.div
                                 style={{ y: overlayY1, rotate: rotateR2 }}
-                                className="absolute top-[12%] right-[-5%] w-24 md:w-32 z-50 pointer-events-none scale-x-[-1] origin-center"
+                                className="absolute top-[12%] right-[-5%] w-32 z-50 pointer-events-none scale-x-[-1] origin-center"
                             >
                                 <img src="/Flowers Spring.gif" alt="" className="w-full h-full object-contain" />
                             </motion.div>
+                            </>}
                         </div>
                         {/* Decorative Border */}
                         <div className="absolute top-4 left-4 w-full h-full border border-wedding-gold/30 rounded-t-[10rem] -z-0" />
