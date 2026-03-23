@@ -8,8 +8,8 @@ import { cn } from "@/lib/utils";
 
 const storyItems = [
     {
-        year: "6:00 PM",
-        yearAr: "٦:٠٠ م",
+        year: "7:00 PM",
+        yearAr: "٧:٠٠ م",
         title: "Guest Gathering",
         titleAr: "استقبال الضيوف",
         description: "Welcome drinks and gathering at the venue.",
@@ -28,12 +28,12 @@ const storyItems = [
         image: "/Grand Entrance.png",
     },
     {
-        year: "12:00 AM",
-        yearAr: "١٢:٠٠ ص",
-        title: "Conclusion",
-        titleAr: "الختام",
-        description: "Wrapping up a magical night.",
-        descriptionAr: "ختام ليلة ساحرة لا تُنسى.",
+        year: "10:00 PM",
+        yearAr: "١٠:٠٠ م",
+        title: "The Last Dance",
+        titleAr: "الرقصة الأخيرة",
+        description: "End the night with love, laughter & memories forever.",
+        descriptionAr: "نختم الليلة بالحب والضحكات وذكريات للأبد.",
         alignment: "right",
         image: "/Conclusion.png",
     },
