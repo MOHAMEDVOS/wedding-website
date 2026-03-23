@@ -80,37 +80,45 @@ export default function Story() {
             );
         }
 
-        // Animate story items - Pure Fading Reveal
+        // Animate story items — Antigravity floating reveal with staggered entrance
         const items = gsap.utils.toArray<HTMLElement>(".story-item");
         items.forEach((item, i) => {
-            // Image Pure Fade (No sliding/masking)
+            const isRight = item.classList.contains("flex-row-reverse");
+            const xStart = isRight ? 60 : -60;
+
+            // Image — float in from the side with spring-like elastic ease
             gsap.fromTo(item.querySelector(".story-image-inner"),
-                { opacity: 0, filter: "blur(10px)" },
+                { opacity: 0, filter: "blur(10px)", y: 30, x: xStart, scale: 0.92 },
                 {
                     opacity: 1,
                     filter: "blur(0px)",
-                    duration: 2,
-                    ease: "power2.inOut",
+                    y: 0,
+                    x: 0,
+                    scale: 1,
+                    duration: 1.6,
+                    ease: "elastic.out(1, 0.75)",
                     scrollTrigger: {
                         trigger: item,
-                        start: "top 80%",
+                        start: "top 82%",
                         toggleActions: "play none none reverse",
                     }
                 }
             );
 
-            // Content Pure Fade (No sliding/masking)
-            gsap.fromTo(item.querySelector(".story-content"),
-                { opacity: 0, filter: "blur(5px)" },
+            // Content — staggered children reveal (time, title, description cascade in)
+            const contentChildren = item.querySelectorAll(".story-content > *");
+            gsap.fromTo(contentChildren,
+                { opacity: 0, y: 25, filter: "blur(4px)" },
                 {
                     opacity: 1,
+                    y: 0,
                     filter: "blur(0px)",
-                    duration: 1.8,
-                    delay: 0.4,
-                    ease: "power2.out",
+                    duration: 1.2,
+                    stagger: 0.12,
+                    ease: "power3.out",
                     scrollTrigger: {
                         trigger: item,
-                        start: "top 75%",
+                        start: "top 78%",
                         toggleActions: "play none none reverse",
                     }
                 }
@@ -167,14 +175,14 @@ export default function Story() {
                                 item.alignment === "right" ? "flex-row-reverse" : "flex-row"
                             )}
                         >
-                            {/* Image Side - Mask Reveal Wrapper */}
-                            <div className="story-image w-1/2 aspect-[4/3] relative overflow-hidden rounded-sm bg-wedding-gold/5 shadow-2xl">
-                                <div className="story-image-inner w-full h-full relative p-1 md:p-2 border border-wedding-gold/20 rounded-sm">
+                            {/* Image Side — Glassmorphic floating card */}
+                            <div className="story-image w-1/2 aspect-[4/3] relative overflow-hidden rounded-lg bg-white/[0.03] backdrop-blur-sm shadow-[0_20px_50px_rgba(0,0,0,0.25),0_0_40px_rgba(212,175,55,0.06)]">
+                                <div className="story-image-inner w-full h-full relative p-1 md:p-2 border border-wedding-gold/15 rounded-lg">
                                     {item.image ? (
                                         <img
                                             src={item.image}
                                             alt={item.title}
-                                            className="w-full h-full object-cover rounded-sm hover:scale-105 transition-transform duration-[3s] ease-out"
+                                            className="w-full h-full object-cover rounded-lg hover:scale-105 transition-transform duration-[3s] ease-out"
                                         />
                                     ) : (
                                         <ImagePlaceholder

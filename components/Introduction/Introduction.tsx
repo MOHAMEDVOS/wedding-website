@@ -34,51 +34,78 @@ export default function Introduction() {
 
             <div className="container mx-auto px-6 md:px-12 relative z-10">
                 {/* === Hero Text Relocated Here === */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.2, ease: "easeOut" }}
-                    className="text-center mb-16 md:mb-24 space-y-4 md:space-y-6"
-                >
-                    <div className="flex flex-col items-center gap-2">
+                <div className="text-center mb-16 md:mb-24 space-y-4 md:space-y-6">
+                    {/* Invitation line — staggered fade */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+                        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+                        className="flex flex-col items-center gap-2"
+                    >
                         <p className="text-wedding-gold tracking-[0.2em] uppercase text-xs md:text-sm font-sans font-medium">
                             Cordially Invited to the Wedding of
                         </p>
                         <p className="text-wedding-gold font-arabic text-lg md:text-xl opacity-90">
                             نتشرف بدعوتكم لحضور حفل زفافنا
                         </p>
-                    </div>
+                    </motion.div>
 
+                    {/* Names — staggered cascade with shimmer */}
                     <h1 className="flex flex-col md:flex-row items-center justify-center font-serif text-5xl md:text-7xl lg:text-8xl text-foreground font-light tracking-tight leading-none md:gap-6">
-                        <div className="flex flex-col items-center">
-                            <span className="font-great-victorian text-6xl md:text-8xl bg-gold-lustre bg-clip-text text-transparent relative block z-10 animate-pulse-slow">
+                        <motion.div
+                            initial={{ opacity: 0, y: 40, scale: 0.9 }}
+                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                            className="flex flex-col items-center"
+                        >
+                            <span className="font-great-victorian text-6xl md:text-8xl shimmer-text relative block z-10">
                                 Mohamed
                             </span>
                             <span className="font-arabic text-3xl md:text-4xl text-wedding-gold/90 -mt-2">
                                 محمد
                             </span>
-                        </div>
+                        </motion.div>
 
-                        <span className="text-xl md:text-3xl font-light italic text-wedding-gold/60 my-2 md:my-0 font-serif block md:inline-block">
+                        <motion.span
+                            initial={{ opacity: 0, scale: 0 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                            className="text-xl md:text-3xl font-light italic text-wedding-gold/60 my-2 md:my-0 font-serif block md:inline-block"
+                        >
                             &
-                        </span>
+                        </motion.span>
 
-                        <div className="flex flex-col items-center">
-                            <span className="font-great-victorian text-6xl md:text-8xl bg-gold-lustre bg-clip-text text-transparent relative block z-10 animate-pulse-slow">
+                        <motion.div
+                            initial={{ opacity: 0, y: 40, scale: 0.9 }}
+                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1.6, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                            className="flex flex-col items-center"
+                        >
+                            <span className="font-great-victorian text-6xl md:text-8xl shimmer-text relative block z-10">
                                 Aya
                             </span>
                             <span className="font-arabic text-3xl md:text-4xl text-wedding-gold/90 mt-2">
                                 آية
                             </span>
-                        </div>
+                        </motion.div>
                     </h1>
 
-                    <div className="flex flex-col items-center gap-1 pt-4 opacity-70">
+                    {/* Date — delayed entrance */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 0.7, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
+                        className="flex flex-col items-center gap-1 pt-4"
+                    >
                         <span className="font-sans tracking-[0.2em] text-xs md:text-sm uppercase">June 28, 2026</span>
                         <span className="font-arabic text-base md:text-lg text-wedding-gold/90">٢٨ يونيو ٢٠٢٦</span>
-                    </div>
-                </motion.div>
+                    </motion.div>
+                </div>
 
                 <div className="flex flex-col md:flex-row items-center gap-12 md:gap-24">
 
