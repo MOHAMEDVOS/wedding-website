@@ -3,92 +3,138 @@
 import { useEffect, useState } from "react";
 import Noise from "../ui/Noise";
 
+const TIME_UNITS = [
+    { key: "days",    label: "Days",   labelAr: "أيام"   },
+    { key: "hours",   label: "Hours",  labelAr: "ساعات"  },
+    { key: "minutes", label: "Mins",   labelAr: "دقائق"  },
+    { key: "seconds", label: "Secs",   labelAr: "ثواني"  },
+];
+
 export default function Countdown() {
     const [timeLeft, setTimeLeft] = useState({
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0
+        days: 0, hours: 0, minutes: 0, seconds: 0,
     });
 
     useEffect(() => {
-        const targetDate = new Date("2026-06-28T15:00:00"); // 3:00 PM Wedding start
-
-        const interval = setInterval(() => {
-            const now = new Date();
-            const difference = targetDate.getTime() - now.getTime();
-
-            if (difference > 0) {
+        const targetDate = new Date("2026-06-28T15:00:00");
+        const tick = () => {
+            const diff = targetDate.getTime() - Date.now();
+            if (diff > 0) {
                 setTimeLeft({
-                    days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-                    hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-                    minutes: Math.floor((difference / 1000 / 60) % 60),
-                    seconds: Math.floor((difference / 1000) % 60)
+                    days:    Math.floor(diff / 86_400_000),
+                    hours:   Math.floor((diff / 3_600_000) % 24),
+                    minutes: Math.floor((diff / 60_000) % 60),
+                    seconds: Math.floor((diff / 1_000) % 60),
                 });
-            } else {
-                clearInterval(interval);
             }
-        }, 1000);
-
-        return () => clearInterval(interval);
+        };
+        tick();
+        const id = setInterval(tick, 1000);
+        return () => clearInterval(id);
     }, []);
 
     return (
-        <section className="py-32 bg-wedding-olive text-wedding-parchment relative overflow-hidden">
+        <section className="py-32 bg-background relative overflow-hidden">
             <Noise />
+
+            {/* Moon glow from top */}
+            <div className="absolute top-0 inset-x-0 h-72 bg-moon-glow pointer-events-none" />
+
+            {/* Bottom emerald ambient */}
+            <div className="aurora-blob absolute -bottom-12 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-wedding-emerald/10 blur-[80px] rounded-full pointer-events-none" />
+
             <div className="container mx-auto px-6 relative z-10 text-center">
 
-                <div className="mb-16 space-y-4">
-                    <span className="font-script text-5xl bg-gold-lustre bg-clip-text text-transparent block mb-2 w-fit mx-auto">The Big Day</span>
-                    <span className="font-arabic text-4xl bg-gold-lustre bg-clip-text text-transparent block w-fit mx-auto">يوم الزفاف</span>
-                    <h2 className="font-serif text-3xl text-white/80">June 28, 2026</h2>
-                    <h2 className="font-arabic text-2xl text-white/80">٢٨ يونيو ٢٠٢٦</h2>
+                {/* ── Section header ── */}
+                <div className="mb-16 space-y-3">
+                    <div className="flex items-center justify-center gap-3 mb-6">
+                        <div className="h-px w-16 bg-gradient-to-r from-transparent to-wedding-gold/40" />
+                        <span className="text-wedding-gold/50 text-[10px] tracking-[0.35em] uppercase">
+                            Counting Down To
+                        </span>
+                        <div className="h-px w-16 bg-gradient-to-l from-transparent to-wedding-gold/40" />
+                    </div>
+
+                    <span className="shimmer-text font-script text-5xl md:text-6xl block w-fit mx-auto">
+                        The Big Day
+                    </span>
+                    <span className="shimmer-text font-arabic text-4xl block w-fit mx-auto">
+                        يوم الزفاف
+                    </span>
+                    <p className="text-foreground/35 tracking-[0.25em] text-xs mt-5 uppercase">
+                        June 28, 2026 · 3:00 PM · Cairo, Egypt
+                    </p>
                 </div>
 
+                {/* ── Circular countdown rings ── */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-                    {/* Days */}
-                    <div className="bg-white/5 border border-wedding-clay/20 p-8 md:p-12 rounded-sm backdrop-blur-sm relative group overflow-hidden">
-                        <div className="absolute inset-0 bg-wedding-clay/0 group-hover:bg-wedding-clay/5 transition-colors duration-500" />
-                        <span className="font-serif text-5xl md:text-7xl block mb-2 text-wedding-clay">{timeLeft.days}</span>
-                        <div className="flex flex-col gap-1 border-t border-wedding-clay/20 pt-4 mt-4">
-                            <span className="text-xs uppercase tracking-[0.2em] opacity-60">Days</span>
-                            <span className="font-arabic text-lg opacity-60">أيام</span>
-                        </div>
-                    </div>
+                    {TIME_UNITS.map(({ key, label, labelAr }) => {
+                        const value = timeLeft[key as keyof typeof timeLeft];
+                        return (
+                            <div key={key} className="flex flex-col items-center group">
+                                {/* Ring stack */}
+                                <div className="relative w-32 h-32 md:w-36 md:h-36 flex items-center justify-center">
 
-                    {/* Hours */}
-                    <div className="bg-white/5 border border-wedding-clay/20 p-8 md:p-12 rounded-sm backdrop-blur-sm relative group overflow-hidden">
-                        <div className="absolute inset-0 bg-wedding-clay/0 group-hover:bg-wedding-clay/5 transition-colors duration-500" />
-                        <span className="font-serif text-5xl md:text-7xl block mb-2 text-wedding-clay">{timeLeft.hours}</span>
-                        <div className="flex flex-col gap-1 border-t border-wedding-clay/20 pt-4 mt-4">
-                            <span className="text-xs uppercase tracking-[0.2em] opacity-60">Hours</span>
-                            <span className="font-arabic text-lg opacity-60">ساعات</span>
-                        </div>
-                    </div>
+                                    {/* Outermost static ghost ring */}
+                                    <div className="absolute inset-0 rounded-full border border-wedding-gold/10" />
 
-                    {/* Minutes */}
-                    <div className="bg-white/5 border border-wedding-clay/20 p-8 md:p-12 rounded-sm backdrop-blur-sm relative group overflow-hidden">
-                        <div className="absolute inset-0 bg-wedding-clay/0 group-hover:bg-wedding-clay/5 transition-colors duration-500" />
-                        <span className="font-serif text-5xl md:text-7xl block mb-2 text-wedding-clay">{timeLeft.minutes}</span>
-                        <div className="flex flex-col gap-1 border-t border-wedding-clay/20 pt-4 mt-4">
-                            <span className="text-xs uppercase tracking-[0.2em] opacity-60">Mins</span>
-                            <span className="font-arabic text-lg opacity-60">دقائق</span>
-                        </div>
-                    </div>
+                                    {/* Rotating conic-gradient ring */}
+                                    <div
+                                        className="absolute inset-0 rounded-full rotate-ring"
+                                        style={{
+                                            background: "conic-gradient(from 0deg, transparent 0%, rgba(212,175,55,0.55) 20%, transparent 40%, rgba(212,175,55,0.2) 70%, transparent 100%)",
+                                            borderRadius: "50%",
+                                        }}
+                                    />
 
-                    {/* Seconds */}
-                    <div className="bg-white/5 border border-wedding-clay/20 p-8 md:p-12 rounded-sm backdrop-blur-sm relative group overflow-hidden">
-                        <div className="absolute inset-0 bg-wedding-clay/0 group-hover:bg-wedding-clay/5 transition-colors duration-500" />
-                        <span className="font-serif text-5xl md:text-7xl block mb-2 text-wedding-clay">{timeLeft.seconds}</span>
-                        <div className="flex flex-col gap-1 border-t border-wedding-clay/20 pt-4 mt-4">
-                            <span className="text-xs uppercase tracking-[0.2em] opacity-60">Secs</span>
-                            <span className="font-arabic text-lg opacity-60">ثواني</span>
-                        </div>
-                    </div>
+                                    {/* Static mid ring */}
+                                    <div className="absolute inset-[3px] rounded-full border border-wedding-gold/20" />
+
+                                    {/* Inner circle face */}
+                                    <div
+                                        className="absolute inset-[7px] rounded-full flex flex-col items-center justify-center glow-gold"
+                                        style={{
+                                            background: "radial-gradient(circle at 40% 35%, #2d3828 0%, #1a2118 100%)",
+                                        }}
+                                    >
+                                        {/* Number */}
+                                        <span
+                                            className="shimmer-text font-serif text-4xl md:text-5xl font-light tabular-nums leading-none"
+                                        >
+                                            {String(value).padStart(2, "0")}
+                                        </span>
+                                    </div>
+
+                                    {/* Hover glow pulse */}
+                                    <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                                        style={{ boxShadow: "0 0 50px rgba(212,175,55,0.25)" }}
+                                    />
+                                </div>
+
+                                {/* Label */}
+                                <div className="mt-4 space-y-1">
+                                    <span className="text-[10px] uppercase tracking-[0.3em] text-wedding-gold/45 block">
+                                        {label}
+                                    </span>
+                                    <span className="font-arabic text-base text-wedding-gold/35 block">
+                                        {labelAr}
+                                    </span>
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
 
-                <div className="mt-16 opacity-60 text-sm md:text-base tracking-widest font-light">
-                    SEE YOU THERE / نراكم هناك
+                {/* ── Footer ornament ── */}
+                <div className="mt-20 flex flex-col items-center gap-3">
+                    <div className="flex items-center gap-4 opacity-40">
+                        <div className="h-px w-16 bg-wedding-gold/50" />
+                        <span className="text-wedding-gold text-xs">◆</span>
+                        <div className="h-px w-16 bg-wedding-gold/50" />
+                    </div>
+                    <p className="text-foreground/35 text-xs tracking-[0.3em] uppercase">
+                        See You There · نراكم هناك
+                    </p>
                 </div>
             </div>
         </section>

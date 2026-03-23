@@ -70,6 +70,21 @@ export default function BackgroundHero() {
             {/* Flying Birds (Doves) */}
             <FlyingBirds />
 
+            {/* Golden aurora glow — top celestial light */}
+            <div className="absolute top-0 inset-x-0 h-64 bg-moon-glow pointer-events-none z-[5]" />
+
+            {/* Enchanted vignette — darkens edges for depth */}
+            <div className="absolute inset-0 bg-enchanted-vignette pointer-events-none z-[5]" />
+
+            {/* Pulsing orb — golden ambient light centre */}
+            <div
+                className="aurora-blob absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none z-[4]"
+                style={{
+                    background: "radial-gradient(circle at center, rgba(212,175,55,0.08) 0%, transparent 70%)",
+                    filter: "blur(40px)",
+                }}
+            />
+
             {/* Subtle Gradient Fade for Transition */}
             <div className="absolute bottom-0 left-0 w-full h-[30vh] bg-gradient-to-b from-transparent to-background pointer-events-none z-10" />
         </div>

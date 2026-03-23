@@ -7,6 +7,7 @@ import CustomCursor from "@/components/ui/CustomCursor";
 import Noise from "@/components/ui/Noise";
 import BackgroundMusic from "@/components/ui/BackgroundMusic";
 import FloatingNote from "@/components/ui/FloatingNote";
+import StarField from "@/components/ui/StarField";
 
 const milchella = localFont({
   src: "../public/Milchella-Regular.ttf",
@@ -62,6 +63,7 @@ export default function RootLayout({
         )}
       >
         <SmoothScroll>
+          <StarField />
           <CustomCursor />
           <Noise />
           {children}
