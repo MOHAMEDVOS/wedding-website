@@ -1,29 +1,8 @@
 "use client";
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function Location() {
-    // Magnetic hover state for the button
-    const btnRef = useRef<HTMLAnchorElement>(null);
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
-    const springX = useSpring(mouseX, { stiffness: 150, damping: 15 });
-    const springY = useSpring(mouseY, { stiffness: 150, damping: 15 });
-
-    const handleBtnMouseMove = (e: React.MouseEvent) => {
-        const rect = btnRef.current?.getBoundingClientRect();
-        if (!rect) return;
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        mouseX.set((e.clientX - cx) * 0.15);
-        mouseY.set((e.clientY - cy) * 0.25);
-    };
-
-    const handleBtnMouseLeave = () => {
-        mouseX.set(0);
-        mouseY.set(0);
-    };
 
     return (
         <section className="py-24 md:py-32 bg-background relative overflow-hidden">
@@ -100,21 +79,15 @@ export default function Location() {
                             />
                         </div>
 
-                        {/* Magnetic hover button — follows cursor with spring physics */}
-                        <motion.a
-                            ref={btnRef}
+                        <a
                             href="https://maps.app.goo.gl/r1Sa9gBWP4Dwwbg87"
                             target="_blank"
                             rel="noopener noreferrer"
-                            onMouseMove={handleBtnMouseMove}
-                            onMouseLeave={handleBtnMouseLeave}
-                            style={{ x: springX, y: springY }}
-                            whileTap={{ scale: 0.96 }}
                             className="w-full block bg-gold-lustre text-wedding-navy font-sans uppercase tracking-[0.2em] py-4 text-center shadow-[0_8px_30px_rgba(212,175,55,0.25)] rounded-lg flex flex-col items-center justify-center gap-1 relative overflow-hidden transition-shadow duration-300 hover:shadow-[0_12px_40px_rgba(212,175,55,0.4)]"
                         >
                             <span className="font-bold">Get Directions</span>
                             <span className="font-arabic text-sm tracking-normal font-bold">احصل على الاتجاهات</span>
-                        </motion.a>
+                        </a>
                     </motion.div>
                 </div>
             </div>
