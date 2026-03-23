@@ -80,45 +80,37 @@ export default function Story() {
             );
         }
 
-        // Animate story items — Antigravity floating reveal with staggered entrance
+        // Animate story items - Pure Fading Reveal
         const items = gsap.utils.toArray<HTMLElement>(".story-item");
-        items.forEach((item, i) => {
-            const isRight = item.classList.contains("flex-row-reverse");
-            const xStart = isRight ? 60 : -60;
-
-            // Image — float in from the side with spring-like elastic ease
+        items.forEach((item) => {
+            // Image Pure Fade (No sliding/masking)
             gsap.fromTo(item.querySelector(".story-image-inner"),
-                { opacity: 0, filter: "blur(10px)", y: 30, x: xStart, scale: 0.92 },
+                { opacity: 0, filter: "blur(10px)" },
                 {
                     opacity: 1,
                     filter: "blur(0px)",
-                    y: 0,
-                    x: 0,
-                    scale: 1,
-                    duration: 1.6,
-                    ease: "elastic.out(1, 0.75)",
+                    duration: 2,
+                    ease: "power2.inOut",
                     scrollTrigger: {
                         trigger: item,
-                        start: "top 82%",
+                        start: "top 80%",
                         toggleActions: "play none none reverse",
                     }
                 }
             );
 
-            // Content — staggered children reveal (time, title, description cascade in)
-            const contentChildren = item.querySelectorAll(".story-content > *");
-            gsap.fromTo(contentChildren,
-                { opacity: 0, y: 25, filter: "blur(4px)" },
+            // Content Pure Fade (No sliding/masking)
+            gsap.fromTo(item.querySelector(".story-content"),
+                { opacity: 0, filter: "blur(5px)" },
                 {
                     opacity: 1,
-                    y: 0,
                     filter: "blur(0px)",
-                    duration: 1.2,
-                    stagger: 0.12,
-                    ease: "power3.out",
+                    duration: 1.8,
+                    delay: 0.4,
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: item,
-                        start: "top 78%",
+                        start: "top 75%",
                         toggleActions: "play none none reverse",
                     }
                 }
