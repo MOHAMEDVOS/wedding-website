@@ -5,14 +5,12 @@ import Details from "@/components/Details/Details";
 import Story from "@/components/Story/Story";
 import Location from "@/components/Gallery/Gallery"; // Renamed component but file is still Gallery.tsx
 import Countdown from "@/components/Countdown/Countdown";
-import ScrollFairy from "@/components/ui/ScrollFairy";
 import BackgroundMusic from "@/components/ui/BackgroundMusic";
 
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <ScrollFairy />
 
       <section className="relative h-screen w-full overflow-hidden">
         <BackgroundHero />
