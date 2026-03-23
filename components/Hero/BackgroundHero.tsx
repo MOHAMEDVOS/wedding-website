@@ -80,7 +80,7 @@ export default function BackgroundHero() {
             <div
                 className="aurora-blob absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none z-[4]"
                 style={{
-                    background: "radial-gradient(circle at center, rgba(212,175,55,0.08) 0%, transparent 70%)",
+                    background: "radial-gradient(circle at center, rgba(196,149,106,0.08) 0%, transparent 70%)",
                     filter: "blur(40px)",
                 }}
             />

@@ -9,57 +9,57 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                background: "#1c261e", // Dark Olive
-                foreground: "#F6F2EC", // Ivory
+                background: "#1E1008", // Deep Dark Brown
+                foreground: "#F5E6D3", // Warm Beige
                 border: "hsl(var(--border))",
                 input: "hsl(var(--input))",
-                ring: "#D4AF37", // Gold Ring
+                ring: "#C4956A", // Warm Bronze
                 primary: {
-                    DEFAULT: "#044d29", // Emerald
-                    foreground: "#F6F2EC",
+                    DEFAULT: "#6B4226", // Rich Chocolate Brown
+                    foreground: "#F5E6D3",
                 },
                 secondary: {
-                    DEFAULT: "#D4AF37", // Gold
-                    foreground: "#1c261e",
+                    DEFAULT: "#C4956A", // Warm Bronze
+                    foreground: "#1E1008",
                 },
                 destructive: {
                     DEFAULT: "hsl(var(--destructive))",
                     foreground: "hsl(var(--destructive-foreground))",
                 },
                 muted: {
-                    DEFAULT: "#2d3828", // Lighter Olive
-                    foreground: "#a3b19a", // Sage Grey
+                    DEFAULT: "#2D1E14", // Lighter Dark Brown
+                    foreground: "#A89080", // Dusty Brown
                 },
                 accent: {
-                    DEFAULT: "#D4AF37",
-                    foreground: "#1c261e",
+                    DEFAULT: "#C4956A",
+                    foreground: "#1E1008",
                 },
                 popover: {
-                    DEFAULT: "#1c261e",
-                    foreground: "#F6F2EC",
+                    DEFAULT: "#1E1008",
+                    foreground: "#F5E6D3",
                 },
                 card: {
-                    DEFAULT: "#1c261e",
-                    foreground: "#F6F2EC",
+                    DEFAULT: "#1E1008",
+                    foreground: "#F5E6D3",
                 },
                 wedding: {
-                    navy: "#1c261e", // Replaced Navy with Dark Olive for legacy compatibility
-                    emerald: "#044d29",
-                    gold: "#D4AF37",
-                    ivory: "#F6F2EC",
-                    charcoal: "#F6F2EC", // Replaced Charcoal with Ivory for text
-                    clay: "#B45309",
+                    navy: "#1E1008", // Deep Dark Brown (legacy)
+                    emerald: "#6B4226", // Chocolate Brown
+                    gold: "#C4956A", // Warm Bronze
+                    ivory: "#F5E6D3", // Warm Beige
+                    charcoal: "#F5E6D3", // Beige for text
+                    clay: "#A0522D", // Sienna
                 },
             },
             backgroundImage: {
-                'olive-gradient': 'linear-gradient(to bottom, #2d3828, #1a2118)',
-                'gold-lustre': 'linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c)',
-                'copper-lustre': 'linear-gradient(to right, #B45309, #d68a5c, #B45309)',
-                'velvet-emerald': 'radial-gradient(circle at center, #0a3d24 0%, #1c261e 100%)',
-                'moon-glow': 'radial-gradient(ellipse at top center, rgba(212,175,55,0.18) 0%, transparent 65%)',
-                'enchanted-vignette': 'radial-gradient(ellipse at center, transparent 40%, rgba(10,20,12,0.6) 100%)',
-                'golden-aurora': 'linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(4,77,41,0.1) 50%, rgba(212,175,55,0.06) 100%)',
-                'celestial': 'radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.12) 0%, transparent 60%)',
+                'olive-gradient': 'linear-gradient(to bottom, #2D1E14, #1A0E06)',
+                'gold-lustre': 'linear-gradient(to right, #8B5E3C, #D4A574, #6B4226, #E8C9A0, #8B5E3C)',
+                'copper-lustre': 'linear-gradient(to right, #A0522D, #C4956A, #A0522D)',
+                'velvet-emerald': 'radial-gradient(circle at center, #3D2414 0%, #1E1008 100%)',
+                'moon-glow': 'radial-gradient(ellipse at top center, rgba(196,149,106,0.18) 0%, transparent 65%)',
+                'enchanted-vignette': 'radial-gradient(ellipse at center, transparent 40%, rgba(20,10,4,0.6) 100%)',
+                'golden-aurora': 'linear-gradient(135deg, rgba(196,149,106,0.06) 0%, rgba(107,66,38,0.1) 50%, rgba(196,149,106,0.06) 100%)',
+                'celestial': 'radial-gradient(ellipse at 50% 0%, rgba(196,149,106,0.12) 0%, transparent 60%)',
             },
             borderRadius: {
                 lg: "var(--radius)",

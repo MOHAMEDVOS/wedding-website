@@ -82,7 +82,7 @@ export default function Countdown() {
                                     <div
                                         className="absolute inset-0 rounded-full rotate-ring"
                                         style={{
-                                            background: "conic-gradient(from 0deg, transparent 0%, rgba(212,175,55,0.55) 20%, transparent 40%, rgba(212,175,55,0.2) 70%, transparent 100%)",
+                                            background: "conic-gradient(from 0deg, transparent 0%, rgba(196,149,106,0.55) 20%, transparent 40%, rgba(196,149,106,0.2) 70%, transparent 100%)",
                                             borderRadius: "50%",
                                         }}
                                     />
@@ -94,7 +94,7 @@ export default function Countdown() {
                                     <div
                                         className="absolute inset-[7px] rounded-full flex flex-col items-center justify-center glow-gold"
                                         style={{
-                                            background: "radial-gradient(circle at 40% 35%, #2d3828 0%, #1a2118 100%)",
+                                            background: "radial-gradient(circle at 40% 35%, #2D1E14 0%, #1A0E06 100%)",
                                         }}
                                     >
                                         {/* Number */}
@@ -107,7 +107,7 @@ export default function Countdown() {
 
                                     {/* Hover glow pulse */}
                                     <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                                        style={{ boxShadow: "0 0 50px rgba(212,175,55,0.25)" }}
+                                        style={{ boxShadow: "0 0 50px rgba(196,149,106,0.25)" }}
                                     />
                                 </div>
 

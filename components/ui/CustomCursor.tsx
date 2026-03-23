@@ -72,7 +72,7 @@ export default function CustomCursor() {
                 >
                     <div
                         className="w-[6px] h-[6px] rounded-full bg-wedding-gold"
-                        style={{ boxShadow: "0 0 8px #D4AF37, 0 0 16px rgba(212,175,55,0.4)" }}
+                        style={{ boxShadow: "0 0 8px #C4956A, 0 0 16px rgba(212,175,55,0.4)" }}
                     />
                 </motion.div>
             ))}
@@ -89,8 +89,8 @@ export default function CustomCursor() {
                     width: 16,
                     height: 16,
                     rotate: 45,
-                    background: "linear-gradient(135deg, #fcf6ba 0%, #D4AF37 50%, #aa771c 100%)",
-                    boxShadow: "0 0 12px rgba(212,175,55,0.7), 0 0 24px rgba(212,175,55,0.3)",
+                    background: "linear-gradient(135deg, #E8C9A0 0%, #C4956A 50%, #6B4226 100%)",
+                    boxShadow: "0 0 12px rgba(196,149,106,0.7), 0 0 24px rgba(196,149,106,0.3)",
                     transition: "opacity 0.2s",
                 }}
             />

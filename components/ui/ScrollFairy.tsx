@@ -76,13 +76,13 @@ export default function ScrollFairy() {
                         {/* WINGS (Back) - Teal with Yellow Border */}
                         <motion.g style={{ rotate: flap, originX: 0.5, originY: 0.5 }}>
                             {/* Top Right Wing */}
-                            <path d="M110 90 Q 150 40, 180 60 Q 190 80, 160 100 Q 140 105, 110 95" fill="#4ECDC4" stroke="#FFD700" strokeWidth="3" />
+                            <path d="M110 90 Q 150 40, 180 60 Q 190 80, 160 100 Q 140 105, 110 95" fill="#4ECDC4" stroke="#C4956A" strokeWidth="3" />
                             {/* Bottom Right Wing */}
-                            <path d="M115 105 Q 160 120, 150 150 Q 130 160, 110 130" fill="#4ECDC4" stroke="#FFD700" strokeWidth="3" />
+                            <path d="M115 105 Q 160 120, 150 150 Q 130 160, 110 130" fill="#4ECDC4" stroke="#C4956A" strokeWidth="3" />
                             {/* Top Left Wing */}
-                            <path d="M90 90 Q 50 40, 20 60 Q 10 80, 40 100 Q 60 105, 90 95" fill="#4ECDC4" stroke="#FFD700" strokeWidth="3" />
+                            <path d="M90 90 Q 50 40, 20 60 Q 10 80, 40 100 Q 60 105, 90 95" fill="#4ECDC4" stroke="#C4956A" strokeWidth="3" />
                             {/* Bottom Left Wing */}
-                            <path d="M85 105 Q 40 120, 50 150 Q 70 160, 90 130" fill="#4ECDC4" stroke="#FFD700" strokeWidth="3" />
+                            <path d="M85 105 Q 40 120, 50 150 Q 70 160, 90 130" fill="#4ECDC4" stroke="#C4956A" strokeWidth="3" />
                         </motion.g>
 
                         {/* BODY GROUP */}
@@ -96,7 +96,7 @@ export default function ScrollFairy() {
                             <ellipse cx="9" cy="40" rx="4" ry="2" fill="#8B4513" />
 
                             {/* Dress - Yellow A-line */}
-                            <path d="M-12 15 L -8 -5 L 8 -5 L 12 15 Q 0 20, -12 15 Z" fill="#FFD700" />
+                            <path d="M-12 15 L -8 -5 L 8 -5 L 12 15 Q 0 20, -12 15 Z" fill="#C4956A" />
                             {/* Green Leaf Patterns on Dress */}
                             <path d="M-5 5 Q -2 8, 0 5 Q 2 8, 5 5" stroke="#4CAF50" strokeWidth="1.5" fill="none" />
                             <circle cx="0" cy="10" r="1.5" fill="#4CAF50" />
@@ -118,7 +118,7 @@ export default function ScrollFairy() {
                             {/* Hair - Brown, Ponytail */}
                             <path d="M-14 -18 Q 0 -35, 14 -18 Q 14 -10, 10 -5 L -10 -5 Q -14 -10, -14 -18" fill="#8B4513" /> {/* bangs */}
                             <circle cx="12" cy="-20" r="8" fill="#8B4513" /> {/* side ponytail/bun */}
-                            <circle cx="16" cy="-25" r="3" fill="#FFD700" /> {/* hair tie */}
+                            <circle cx="16" cy="-25" r="3" fill="#C4956A" /> {/* hair tie */}
 
                         </g>
 
@@ -126,7 +126,7 @@ export default function ScrollFairy() {
                         <motion.g animate={{ rotate: [0, 10, 0, -10, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
                             <line x1="118" y1="100" x2="125" y2="85" stroke="#8B4513" strokeWidth="2" strokeLinecap="round" />
                             {/* Star Tip */}
-                            <polygon points="125,80 127,84 131,84 128,87 129,91 125,88 121,91 122,87 119,84 123,84" fill="#4CAF50" stroke="#FFD700" strokeWidth="1" />
+                            <polygon points="125,80 127,84 131,84 128,87 129,91 125,88 121,91 122,87 119,84 123,84" fill="#4CAF50" stroke="#C4956A" strokeWidth="1" />
                         </motion.g>
 
                     </svg>
@@ -142,7 +142,7 @@ export default function ScrollFairy() {
                                     top: s.top,
                                     width: s.size,
                                     height: s.size,
-                                    boxShadow: "0 0 6px #FFD700",
+                                    boxShadow: "0 0 6px #C4956A",
                                 }}
                                 animate={{
                                     opacity: [0, 1, 0],

@@ -59,18 +59,18 @@ export default function StarField() {
                         star.x, star.y, 0,
                         star.x, star.y, star.size * 5
                     );
-                    grad.addColorStop(0, `rgba(212,175,55,${(o * 0.38).toFixed(3)})`);
-                    grad.addColorStop(1, "rgba(212,175,55,0)");
+                    grad.addColorStop(0, `rgba(196,149,106,${(o * 0.38).toFixed(3)})`);
+                    grad.addColorStop(1, "rgba(196,149,106,0)");
                     ctx.beginPath();
                     ctx.arc(star.x, star.y, star.size * 5, 0, Math.PI * 2);
                     ctx.fillStyle = grad;
                     ctx.fill();
                 }
 
-                // Core dot — warm ivory-gold
+                // Core dot — warm beige
                 ctx.beginPath();
                 ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(252,246,186,${o.toFixed(3)})`;
+                ctx.fillStyle = `rgba(232,201,160,${o.toFixed(3)})`;
                 ctx.fill();
             }
 
