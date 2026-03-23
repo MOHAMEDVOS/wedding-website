@@ -15,7 +15,7 @@ const storyItems = [
         description: "Welcome drinks and gathering at the venue.",
         descriptionAr: "مشروبات ترحيبية واستقبال الضيوف في القاعة.",
         alignment: "right",
-        image: "/Guest Gathering.png",
+        image: "/Guest Gathering.jpg",
     },
     {
         year: "7:30 PM",
