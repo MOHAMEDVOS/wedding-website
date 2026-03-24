@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
 
-const groomColors = ["#c8a97a", "#b8935a", "#9a7540"];
+const groomColors = ["#d6c4a8", "#c2aa8a", "#a8906e"];
 const brideColors  = ["#3d1a0e", "#4a2518", "#2e1710"];
 
 export default function DressCode() {
