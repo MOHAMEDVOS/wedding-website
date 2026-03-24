@@ -2,7 +2,6 @@ import HeroContent from "@/components/Hero/HeroContent";
 import BackgroundHero from "@/components/Hero/BackgroundHero";
 import Introduction from "@/components/Introduction/Introduction";
 import Details from "@/components/Details/Details";
-import Story from "@/components/Story/Story";
 import Location from "@/components/Gallery/Gallery"; // Renamed component but file is still Gallery.tsx
 import Countdown from "@/components/Countdown/Countdown";
 import DressCode from "@/components/DressCode/DressCode";
@@ -38,10 +37,6 @@ export default function Home() {
       <div className="-mt-1 relative z-10">
         <Introduction />
       </div>
-
-      <GoldSeparator />
-
-      <Story />
 
       <GoldSeparator />
 
