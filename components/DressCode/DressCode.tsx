@@ -74,12 +74,11 @@ export default function DressCode() {
                             {groomColors.map((c, i) => (
                                 <motion.div
                                     key={c}
-                                    className="rounded-full border border-white/10"
+                                    className="rounded-full"
                                     style={{
                                         backgroundColor: c,
                                         width: i === 1 ? 56 : 44,
                                         height: i === 1 ? 56 : 44,
-                                        boxShadow: `0 0 20px ${c}66`,
                                     }}
                                     whileHover={{ scale: 1.2 }}
                                     transition={{ duration: 0.3 }}
@@ -124,12 +123,11 @@ export default function DressCode() {
                             {brideColors.map((c, i) => (
                                 <motion.div
                                     key={c}
-                                    className="rounded-full border border-white/10"
+                                    className="rounded-full"
                                     style={{
                                         backgroundColor: c,
                                         width: i === 1 ? 56 : 44,
                                         height: i === 1 ? 56 : 44,
-                                        boxShadow: `0 0 20px ${c}88`,
                                     }}
                                     whileHover={{ scale: 1.2 }}
                                     transition={{ duration: 0.3 }}
