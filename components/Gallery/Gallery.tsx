@@ -103,11 +103,6 @@ export default function Location() {
                             <p className="font-arabic text-xl text-foreground/60">القاهرة، مصر</p>
                         </div>
 
-                        {/* Date */}
-                        <div className="space-y-1">
-                            <p className="font-arabic text-xl text-wedding-gold/70">٢٨ يونيو ٢٠٢٦</p>
-                        </div>
-
                         {/* Bottom decoration */}
                         <div className="flex items-center justify-center gap-2 pt-2 opacity-40">
                             <div className="h-px w-8 bg-wedding-gold/50" />

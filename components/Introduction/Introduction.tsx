@@ -194,12 +194,6 @@ export default function Introduction() {
                             <span className="text-wedding-gold text-xs">◆</span>
                             <div className="h-px w-10 bg-wedding-gold/50" />
                         </div>
-                        <span className="font-sans tracking-[0.25em] text-xs md:text-sm uppercase text-wedding-gold/50 mt-1">
-                            June 28, 2026
-                        </span>
-                        <span className="font-arabic text-base md:text-lg text-wedding-gold/75">
-                            ٢٨ يونيو ٢٠٢٦
-                        </span>
                     </motion.div>
                 </div>
 

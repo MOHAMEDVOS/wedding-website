@@ -65,7 +65,7 @@ export default function Countdown() {
                         يوم الزفاف
                     </h2>
                     <p className="font-arabic text-sm text-foreground/40 tracking-widest">
-                        ٢٨ يونيو ٢٠٢٦ · الثالثة مساءً · القاهرة، مصر
+                        القاهرة، مصر
                     </p>
                 </motion.div>
 

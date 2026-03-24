@@ -33,10 +33,6 @@ export default function Story() {
                         <div className="h-px w-16 bg-gradient-to-l from-transparent to-wedding-gold/50" />
                     </div>
 
-                    <span className="font-amiri text-xl md:text-2xl text-wedding-gold/75 block" dir="rtl">
-                        ٢٨ يونيو ٢٠٢٦
-                    </span>
-
                     <h2
                         className="font-amiri text-2xl md:text-4xl lg:text-5xl text-foreground/90 leading-snug max-w-2xl mx-auto"
                         dir="rtl"
