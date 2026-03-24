@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useRef } from "react";
 
 const groomColors = ["#e8d5b7", "#c9a96e", "#b8935a"];
-const brideColors  = ["#6b3a2a", "#4a2518", "#2e1710"];
+const brideColors  = ["#3d1a0e", "#4a2518", "#2e1710"];
 
 export default function DressCode() {
     const sectionRef = useRef<HTMLDivElement>(null);
