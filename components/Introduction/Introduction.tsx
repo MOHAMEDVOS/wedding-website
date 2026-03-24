@@ -34,7 +34,7 @@ function CornerOrnament({ className }: { className?: string }) {
 
 // Staggered text reveal line by line
 const storyLines = [
-    { text: "٢٨ يونيو ٢٠٢٦", isDate: true },
+    { text: "الأحد ٢٨ يونيو ٢٠٢٦", isDate: true },
     { text: "اليوم الذي نصبح فيه واحداً، محاطين بمن نحب.", isDate: false },
 ];
 
