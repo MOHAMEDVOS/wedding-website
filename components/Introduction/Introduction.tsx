@@ -197,10 +197,34 @@ export default function Introduction() {
                     </motion.div>
                 </div>
 
-                {/* === Two Columns: Photo + Story Text === */}
-                <div className="flex flex-col md:flex-row items-center gap-12 md:gap-24">
+                {/* === Text above, centered photo below === */}
+                {/* Story text centered above */}
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="text-center space-y-4 mb-12"
+                    dir="rtl"
+                >
+                    {storyLines.map((line, i) => (
+                        <motion.div key={i} variants={lineVariants}>
+                            {line.isDate ? (
+                                <p className="font-arabic text-3xl md:text-5xl text-wedding-gold leading-tight">
+                                    {line.text}
+                                </p>
+                            ) : (
+                                <p className="font-arabic text-2xl md:text-3xl leading-relaxed text-foreground/85">
+                                    {line.text}
+                                </p>
+                            )}
+                        </motion.div>
+                    ))}
+                </motion.div>
 
-                    {/* Image Side — with elegant frame + corner ornaments */}
+                <div className="flex flex-col items-center">
+
+                    {/* Image centered */}
                     <div className="w-full md:w-1/2 relative">
                         {/* Outer decorative offset border */}
                         <div
@@ -332,58 +356,7 @@ export default function Introduction() {
                         </div>
                     </div>
 
-                    {/* Text Side — story lines fade in one by one */}
-                    <motion.div
-                        style={{ y, opacity }}
-                        className="w-full md:w-1/2 text-center md:text-right space-y-10"
-                    >
-                        {/* Gold ornament above text */}
-                        <motion.div
-                            initial={{ opacity: 0, scaleX: 0 }}
-                            whileInView={{ opacity: 1, scaleX: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                            className="hidden md:flex items-center justify-end gap-3 mb-2"
-                        >
-                            <div className="h-px w-20 bg-gradient-to-l from-wedding-gold/50 to-transparent" />
-                            <span className="text-wedding-gold/60 text-xs">◆</span>
-                        </motion.div>
-
-                        {/* Story lines staggered */}
-                        <motion.div
-                            variants={containerVariants}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            className="space-y-6"
-                            dir="rtl"
-                        >
-                            {storyLines.map((line, i) => (
-                                <motion.div key={i} variants={lineVariants}>
-                                    {line.isDate ? (
-                                        <p className="font-arabic text-3xl md:text-5xl text-wedding-gold leading-tight">
-                                            {line.text}
-                                        </p>
-                                    ) : (
-                                        <p className="font-arabic text-2xl md:text-3xl leading-relaxed text-foreground/85">
-                                            {line.text}
-                                        </p>
-                                    )}
-                                </motion.div>
-                            ))}
-                        </motion.div>
-
-                        {/* Closing sentiment */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 12 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
-                            className="pt-4"
-                            dir="rtl"
-                        >
-                        </motion.div>
-                    </motion.div>
+                </div>
                 </div>
             </div>
         </section>
