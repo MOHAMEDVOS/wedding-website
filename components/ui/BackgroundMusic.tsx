@@ -11,6 +11,19 @@ export default function BackgroundMusic() {
     const [showOverlay, setShowOverlay] = useState(true);
     const [isOpening, setIsOpening] = useState(false);
 
+    useEffect(() => {
+        const handleVisibilityChange = () => {
+            if (!audioRef.current) return;
+            if (document.hidden) {
+                audioRef.current.pause();
+            } else if (isPlaying && !isMuted) {
+                audioRef.current.play().catch(() => {});
+            }
+        };
+        document.addEventListener("visibilitychange", handleVisibilityChange);
+        return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+    }, [isPlaying, isMuted]);
+
     const startMusic = () => {
         setIsOpening(true);
 
@@ -116,7 +129,7 @@ export default function BackgroundMusic() {
                                         transition={{ delay: 1 }}
                                         className="absolute -bottom-16 left-0 w-full text-wedding-gold/60 font-cormorant tracking-[0.2em] uppercase text-xs animate-pulse"
                                     >
-                                        Click the seal to open
+                                        اضغط على الختم لفتح
                                     </motion.p>
                                 )}
                             </div>
@@ -157,7 +170,7 @@ export default function BackgroundMusic() {
                                         />
                                     ))}
                                 </div>
-                                Music On
+                                الموسيقى تعزف
                             </motion.div>
                         )}
                     </AnimatePresence>
