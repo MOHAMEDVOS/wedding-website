@@ -1,141 +1,165 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Noise from "../ui/Noise";
+import { motion } from "framer-motion";
 
-const TIME_UNITS = [
-    { key: "days",    label: "Days",   labelAr: "أيام"   },
-    { key: "hours",   label: "Hours",  labelAr: "ساعات"  },
-    { key: "minutes", label: "Mins",   labelAr: "دقائق"  },
-    { key: "seconds", label: "Secs",   labelAr: "ثواني"  },
+function getTimeLeft() {
+    const target = new Date("2026-06-28T15:00:00").getTime();
+    const diff = target - Date.now();
+    if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    return {
+        days:    Math.floor(diff / 86_400_000),
+        hours:   Math.floor((diff / 3_600_000) % 24),
+        minutes: Math.floor((diff / 60_000) % 60),
+        seconds: Math.floor((diff / 1_000) % 60),
+    };
+}
+
+const units = [
+    { key: "days",    label: "أيام"   },
+    { key: "hours",   label: "ساعات"  },
+    { key: "minutes", label: "دقائق"  },
+    { key: "seconds", label: "ثواني"  },
 ];
 
 export default function Countdown() {
-    const [timeLeft, setTimeLeft] = useState({
-        days: 0, hours: 0, minutes: 0, seconds: 0,
-    });
+    const [time, setTime] = useState(getTimeLeft);
 
     useEffect(() => {
-        const targetDate = new Date("2026-06-28T15:00:00");
-        const tick = () => {
-            const diff = targetDate.getTime() - Date.now();
-            if (diff > 0) {
-                setTimeLeft({
-                    days:    Math.floor(diff / 86_400_000),
-                    hours:   Math.floor((diff / 3_600_000) % 24),
-                    minutes: Math.floor((diff / 60_000) % 60),
-                    seconds: Math.floor((diff / 1_000) % 60),
-                });
-            }
-        };
-        tick();
-        const id = setInterval(tick, 1000);
+        const id = setInterval(() => setTime(getTimeLeft()), 1000);
         return () => clearInterval(id);
     }, []);
 
     return (
         <section className="py-32 bg-background relative overflow-hidden">
-            <Noise />
 
-            {/* Moon glow from top */}
-            <div className="absolute top-0 inset-x-0 h-72 bg-moon-glow pointer-events-none" />
-
-            {/* Bottom emerald ambient */}
-            <div className="aurora-blob absolute -bottom-12 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-wedding-emerald/10 blur-[80px] rounded-full pointer-events-none" />
+            {/* Ambient glow */}
+            <motion.div
+                animate={{ opacity: [0.2, 0.4, 0.2], scale: [1, 1.08, 1] }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
+                style={{
+                    background: "radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 65%)",
+                    filter: "blur(60px)",
+                }}
+            />
 
             <div className="container mx-auto px-6 relative z-10 text-center">
 
-                {/* ── Section header ── */}
-                <div className="mb-16 space-y-3">
-                    <div className="flex items-center justify-center gap-3 mb-6">
-                        <div className="h-px w-16 bg-gradient-to-r from-transparent to-wedding-gold/40" />
-                        <span className="text-wedding-gold/50 text-[10px] tracking-[0.35em] uppercase">
-                            Counting Down To
-                        </span>
-                        <div className="h-px w-16 bg-gradient-to-l from-transparent to-wedding-gold/40" />
+                {/* Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="mb-20"
+                >
+                    <div className="flex items-center justify-center gap-4 mb-8">
+                        <div className="h-px w-20" style={{ background: "linear-gradient(to left, rgba(212,175,55,0.5), transparent)" }} />
+                        <span className="text-wedding-gold/50 text-sm">✦</span>
+                        <div className="h-px w-20" style={{ background: "linear-gradient(to right, rgba(212,175,55,0.5), transparent)" }} />
                     </div>
 
-                    <span className="shimmer-text font-script text-5xl md:text-6xl block w-fit mx-auto">
-                        The Big Day
-                    </span>
-                    <span className="shimmer-text font-arabic text-4xl block w-fit mx-auto">
+                    <h2 className="font-arabic text-5xl md:text-7xl text-foreground mb-4"
+                        style={{ textShadow: "0 0 40px rgba(212,175,55,0.25)" }}>
                         يوم الزفاف
-                    </span>
-                    <p className="text-foreground/35 tracking-[0.25em] text-xs mt-5 uppercase">
-                        June 28, 2026 · 3:00 PM · Cairo, Egypt
+                    </h2>
+                    <p className="font-arabic text-sm text-foreground/40 tracking-widest">
+                        ٢٨ يونيو ٢٠٢٦ · الثالثة مساءً · القاهرة، مصر
                     </p>
-                </div>
+                </motion.div>
 
-                {/* ── Circular countdown rings ── */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-                    {TIME_UNITS.map(({ key, label, labelAr }) => {
-                        const value = timeLeft[key as keyof typeof timeLeft];
+                {/* Countdown rings */}
+                <div className="flex flex-wrap justify-center gap-8 md:gap-12">
+                    {units.map(({ key, label }, i) => {
+                        const val = String(time[key as keyof typeof time]).padStart(2, "0");
                         return (
-                            <div key={key} className="flex flex-col items-center group">
-                                {/* Ring stack */}
-                                <div className="relative w-32 h-32 md:w-36 md:h-36 flex items-center justify-center">
+                            <motion.div
+                                key={key}
+                                initial={{ opacity: 0, y: 40, scale: 0.9 }}
+                                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 1, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                                className="flex flex-col items-center gap-5"
+                            >
+                                {/* Ring */}
+                                <div className="relative w-28 h-28 md:w-36 md:h-36 flex items-center justify-center">
 
-                                    {/* Outermost static ghost ring */}
-                                    <div className="absolute inset-0 rounded-full border border-wedding-gold/10" />
+                                    {/* Outer static ring */}
+                                    <div className="absolute inset-0 rounded-full"
+                                        style={{ border: "1px solid rgba(212,175,55,0.15)" }} />
 
-                                    {/* Rotating conic-gradient ring */}
-                                    <div
-                                        className="absolute inset-0 rounded-full rotate-ring"
+                                    {/* Spinning shimmer ring */}
+                                    <motion.div
+                                        className="absolute inset-0 rounded-full"
+                                        animate={{ rotate: 360 }}
+                                        transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
                                         style={{
-                                            background: "conic-gradient(from 0deg, transparent 0%, rgba(196,149,106,0.55) 20%, transparent 40%, rgba(196,149,106,0.2) 70%, transparent 100%)",
+                                            background: "conic-gradient(from 0deg, transparent 0%, rgba(212,175,55,0.6) 25%, transparent 50%)",
                                             borderRadius: "50%",
                                         }}
                                     />
 
-                                    {/* Static mid ring */}
-                                    <div className="absolute inset-[3px] rounded-full border border-wedding-gold/20" />
-
-                                    {/* Inner circle face */}
+                                    {/* Inner face */}
                                     <div
-                                        className="absolute inset-[7px] rounded-full flex flex-col items-center justify-center glow-gold"
+                                        className="absolute inset-[4px] rounded-full flex items-center justify-center"
                                         style={{
-                                            background: "radial-gradient(circle at 40% 35%, #2D1E14 0%, #1A0E06 100%)",
+                                            background: "radial-gradient(circle at 40% 35%, #1a0e06 0%, #0d0704 100%)",
+                                            border: "1px solid rgba(212,175,55,0.1)",
                                         }}
                                     >
-                                        {/* Number */}
                                         <span
-                                            className="shimmer-text font-serif text-4xl md:text-5xl font-light tabular-nums leading-none"
+                                            style={{
+                                                fontFamily: "'Courier New', Courier, monospace",
+                                                fontSize: "clamp(1.6rem, 4vw, 2.4rem)",
+                                                fontWeight: 300,
+                                                color: "#d4af37",
+                                                letterSpacing: "0.08em",
+                                                direction: "ltr",
+                                                unicodeBidi: "isolate" as any,
+                                                textShadow: "0 0 20px rgba(212,175,55,0.5)",
+                                            }}
                                         >
-                                            {String(value).padStart(2, "0")}
+                                            {val}
                                         </span>
                                     </div>
 
-                                    {/* Hover glow pulse */}
-                                    <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                                        style={{ boxShadow: "0 0 50px rgba(196,149,106,0.25)" }}
+                                    {/* Pulse glow */}
+                                    <motion.div
+                                        className="absolute inset-0 rounded-full pointer-events-none"
+                                        animate={{ opacity: [0.1, 0.25, 0.1] }}
+                                        transition={{ duration: 3 + i * 0.4, repeat: Infinity, ease: "easeInOut" }}
+                                        style={{
+                                            boxShadow: "0 0 30px rgba(212,175,55,0.2)",
+                                        }}
                                     />
                                 </div>
 
                                 {/* Label */}
-                                <div className="mt-4 space-y-1">
-                                    <span className="text-[10px] uppercase tracking-[0.3em] text-wedding-gold/45 block">
-                                        {label}
-                                    </span>
-                                    <span className="font-arabic text-base text-wedding-gold/35 block">
-                                        {labelAr}
-                                    </span>
-                                </div>
-                            </div>
+                                <span className="font-arabic text-sm text-wedding-gold/50 tracking-wide">
+                                    {label}
+                                </span>
+                            </motion.div>
                         );
                     })}
                 </div>
 
-                {/* ── Footer ornament ── */}
-                <div className="mt-20 flex flex-col items-center gap-3">
-                    <div className="flex items-center gap-4 opacity-40">
-                        <div className="h-px w-16 bg-wedding-gold/50" />
+                {/* Footer */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.2, delay: 0.6 }}
+                    className="mt-20 flex flex-col items-center gap-3"
+                >
+                    <div className="flex items-center gap-4 opacity-30">
+                        <div className="h-px w-16 bg-wedding-gold" />
                         <span className="text-wedding-gold text-xs">◆</span>
-                        <div className="h-px w-16 bg-wedding-gold/50" />
+                        <div className="h-px w-16 bg-wedding-gold" />
                     </div>
-                    <p className="text-foreground/35 text-xs tracking-[0.3em] uppercase">
-                        See You There · نراكم هناك
-                    </p>
-                </div>
+                    <p className="font-arabic text-xs text-foreground/30 tracking-widest mt-1">نراكم هناك</p>
+                </motion.div>
+
             </div>
         </section>
     );

@@ -116,6 +116,43 @@ html.lenis {
   100% { background-position:  200% center; }
 }
 
+@keyframes gold-shimmer-move {
+  0%   { background-position: -300% center; }
+  100% { background-position:  300% center; }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scaleX(1); opacity: 0.6; }
+  50%       { transform: scaleX(1.08); opacity: 1; }
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+
+@keyframes particle-rise {
+  0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0.8; }
+  100% { transform: translateY(-120px) translateX(var(--drift, 20px)) scale(0); opacity: 0; }
+}
+
+@keyframes orb-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%       { opacity: 0.55; transform: scale(1.12); }
+}
+
+@keyframes line-draw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes number-tick {
+  0%   { opacity: 0; transform: translateY(-8px); }
+  15%  { opacity: 1; transform: translateY(0); }
+  85%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(8px); }
+}
+
 /* ============================================
    MAGICAL UTILITY CLASSES
    ============================================ */
@@ -123,6 +160,25 @@ html.lenis {
 /* Bronze text — static gold */
 .shimmer-text {
   color: #D4A574;
+}
+
+/* Living gold shimmer text */
+.shimmer-text-live {
+  background: linear-gradient(
+    90deg,
+    #b8943e 0%,
+    #d4af37 20%,
+    #f0d060 35%,
+    #ffe680 50%,
+    #f0d060 65%,
+    #d4af37 80%,
+    #b8943e 100%
+  );
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gold-shimmer-move 4s linear infinite;
 }
 
 /* Pulsing gold glow on any element */
@@ -143,4 +199,83 @@ html.lenis {
 /* Twinkling star dot */
 .twinkle {
   animation: twinkle 2.5s ease-in-out infinite;
+}
+
+/* Breathing line */
+.breathe-line {
+  animation: breathe 3s ease-in-out infinite;
+}
+
+/* Scroll bounce */
+.scroll-bounce {
+  animation: scroll-bounce 1.8s ease-in-out infinite;
+}
+
+/* Orb pulse */
+.orb-pulse {
+  animation: orb-pulse 6s ease-in-out infinite;
+}
+
+/* Gold particle rising */
+.particle-rise {
+  animation: particle-rise 4s ease-out infinite;
+}
+
+/* Glassmorphic card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.12);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.35),
+    0 0 40px rgba(196, 149, 106, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Gold ornament divider */
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ornament-divider::before,
+.ornament-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.5), transparent);
+}
+
+/* Luxury button shimmer */
+.btn-gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    #8B5E3C 0%,
+    #D4A574 25%,
+    #f0d060 50%,
+    #D4A574 75%,
+    #8B5E3C 100%
+  );
+  background-size: 200% auto;
+  transition: background-position 0.6s ease, box-shadow 0.3s ease;
+}
+
+.btn-gold-shimmer:hover {
+  background-position: right center;
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.5), 0 8px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Section gold separator */
+.section-separator {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.3), rgba(212, 175, 55, 0.5), rgba(212, 175, 55, 0.3), transparent);
+}
+
+/* Luxury watch number display */
+.watch-display {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
 }

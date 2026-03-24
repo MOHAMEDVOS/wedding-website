@@ -119,13 +119,29 @@ export default function FloatingNote() {
                     </div>
                 </div>
 
-                {/* Optional "Click Me" label */}
+                {/* Always-visible pulsing label */}
                 <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileHover={{ opacity: 1, y: -5 }}
-                    className="absolute -top-10 left-1/2 -translate-x-1/2 bg-wedding-navy/80 text-wedding-gold px-3 py-1 rounded-full text-xs font-scripalt tracking-widest uppercase pointer-events-none whitespace-nowrap border border-wedding-gold/30"
+                    animate={{ opacity: [0.7, 1, 0.7], y: [0, -4, 0] }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute -top-12 left-1/2 -translate-x-1/2 pointer-events-none whitespace-nowrap flex flex-col items-center gap-1"
                 >
-                    Song Request
+                    <span
+                        className="font-arabic text-xs text-wedding-gold px-3 py-1 rounded-full border border-wedding-gold/40 backdrop-blur-sm"
+                        style={{
+                            background: "rgba(10,8,4,0.7)",
+                            boxShadow: "0 0 12px rgba(212,175,55,0.2)",
+                        }}
+                    >
+                        اضغط هنا ✦
+                    </span>
+                    {/* Arrow pointing down */}
+                    <motion.span
+                        animate={{ y: [0, 3, 0] }}
+                        transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+                        className="text-wedding-gold/60 text-xs"
+                    >
+                        ▼
+                    </motion.span>
                 </motion.div>
             </motion.div>
 
@@ -207,7 +223,6 @@ export default function FloatingNote() {
                                                     className="flex flex-col items-center space-y-4 py-8"
                                                 >
                                                     <span className="text-4xl">✨</span>
-                                                    <p className="font-scripalt text-[#4b2e1f] text-xl italic">Thank you!</p>
                                                     <p className="font-amiri text-[#4b2e1f] text-lg">!شكراً ليك</p>
                                                 </motion.div>
                                             ) : (
@@ -218,9 +233,6 @@ export default function FloatingNote() {
                                                 className="flex flex-col items-center justify-center w-full space-y-8 md:space-y-10"
                                             >
                                                 <div className="space-y-4 text-center">
-                                                    <h3 className="font-scripalt text-[#4b2e1f] text-xl md:text-3xl leading-relaxed italic font-medium">
-                                                        What song will make you jump out of your seat?
-                                                    </h3>
                                                     <h3 className="font-amiri text-[#4b2e1f] text-xl md:text-2xl leading-relaxed font-bold">
                                                         إيه الأغنية اللي هتخليك تقوم من مكانك؟
                                                     </h3>
@@ -232,7 +244,7 @@ export default function FloatingNote() {
                                                             type="text"
                                                             value={name}
                                                             onChange={(e) => setName(e.target.value)}
-                                                            placeholder="Your name... / اسمك..."
+                                                            placeholder="اسمك..."
                                                             className="w-full bg-transparent border-b-2 border-[#4b2e1f]/20 focus:border-[#4b2e1f]/40 outline-none text-[#4b2e1f] font-scripalt text-lg py-2 px-1 text-center transition-colors placeholder:text-[#4b2e1f]/30 italic"
                                                             disabled={sending}
                                                         />
@@ -242,7 +254,7 @@ export default function FloatingNote() {
                                                             type="text"
                                                             value={song}
                                                             onChange={(e) => setSong(e.target.value)}
-                                                            placeholder="Your song... / أغنيتك المفضلة..."
+                                                            placeholder="أغنيتك المفضلة..."
                                                             className="w-full bg-transparent border-b-2 border-[#4b2e1f]/20 focus:border-[#4b2e1f]/40 outline-none text-[#4b2e1f] font-scripalt text-xl py-2 px-1 text-center transition-colors placeholder:text-[#4b2e1f]/30 italic"
                                                             required
                                                             disabled={sending}
@@ -257,7 +269,7 @@ export default function FloatingNote() {
                                                     >
                                                         <div className="absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                                             <span className="font-scripalt text-[#4b2e1f]/60 text-xs italic tracking-widest uppercase">
-                                                                {sending ? "Sending..." : "Seal Your Answer"}
+                                                                {sending ? "جاري الإرسال..." : "اختم إجابتك"}
                                                             </span>
                                                         </div>
 
