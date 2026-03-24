@@ -357,7 +357,6 @@ export default function Introduction() {
                     </div>
 
                 </div>
-                </div>
             </div>
         </section>
     );
