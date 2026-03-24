@@ -382,11 +382,6 @@ export default function Introduction() {
                             className="pt-4"
                             dir="rtl"
                         >
-                            {/* Thin gold line */}
-                            <div className="h-px w-16 bg-gradient-to-r from-wedding-gold/50 to-transparent mb-6 mr-0 ml-auto md:ml-0 md:mr-0" />
-                            <p className="font-arabic text-3xl md:text-4xl text-wedding-gold/75">
-                                بكل الحب
-                            </p>
                         </motion.div>
                     </motion.div>
                 </div>
