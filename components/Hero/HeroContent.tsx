@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 
 // A single floating gold dust particle
 function GoldParticle({ index }: { index: number }) {
@@ -19,7 +19,6 @@ function GoldParticle({ index }: { index: number }) {
                 left: `${left}%`,
                 bottom: "15%",
                 background: `radial-gradient(circle, rgba(212,175,55,0.9) 0%, rgba(212,175,55,0) 70%)`,
-                "--drift": `${drift}px`,
             } as React.CSSProperties}
             animate={{
                 y: [-0, -110 - (index % 40)],
@@ -81,7 +80,6 @@ export default function HeroContent() {
                             ease: "easeInOut",
                         }}
                     />
-                    {/* Static background line */}
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-wedding-gold/20 to-transparent" />
                 </div>
 

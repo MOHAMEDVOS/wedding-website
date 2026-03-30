@@ -6,6 +6,7 @@ import Location from "@/components/Gallery/Gallery"; // Renamed component but fi
 import Countdown from "@/components/Countdown/Countdown";
 import DressCode from "@/components/DressCode/DressCode";
 import BackgroundMusic from "@/components/ui/BackgroundMusic";
+import MagicalClouds from "@/components/ui/MagicalClouds";
 
 
 // Thin gold section separator — visible between major sections
@@ -33,8 +34,10 @@ export default function Home() {
         <HeroContent />
       </section>
 
-      {/* Negative margin to ensure seamless blend with hero gradient */}
-      <div className="-mt-1 relative z-10">
+      {/* Magical clouds — fixed overlay, parts on scroll */}
+      <MagicalClouds />
+
+      <div className="relative z-10">
         <Introduction />
       </div>
 

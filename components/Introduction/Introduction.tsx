@@ -1,9 +1,10 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import ImagePlaceholder from "../ui/ImagePlaceholder";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { animate, stagger } from "animejs";
 
 // Corner ornament SVG — delicate gold filigree
 function CornerOrnament({ className }: { className?: string }) {
@@ -41,6 +42,82 @@ const storyLines = [
 export default function Introduction() {
     const containerRef = useRef<HTMLDivElement>(null);
     const isMobile = useMediaQuery('(max-width: 768px)');
+    const hasRevealed = useRef(false);
+
+    // Anime.js reveal — fires once when section enters viewport (clouds finish parting)
+    useEffect(() => {
+        const el = containerRef.current;
+        if (!el) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting && !hasRevealed.current) {
+                    hasRevealed.current = true;
+
+                    // Gold ornament lines grow outward
+                    animate(".intro-separator", {
+                        scaleX: [0, 1],
+                        opacity: [0, 1],
+                        duration: 1200,
+                        ease: "cubicBezier(0.16, 1, 0.3, 1)",
+                        delay: stagger(150, { start: 200 }),
+                    });
+
+                    // Invitation tagline floats up with blur
+                    animate(".intro-tagline", {
+                        opacity: [0, 1],
+                        translateY: [40, 0],
+                        duration: 1400,
+                        ease: "cubicBezier(0.16, 1, 0.3, 1)",
+                        delay: 300,
+                    });
+
+                    // Names cascade in with spring
+                    animate(".intro-name", {
+                        opacity: [0, 1],
+                        translateY: [80, 0],
+                        scale: [0.82, 1],
+                        duration: 1800,
+                        ease: "spring(1, 68, 10, 0)",
+                        delay: stagger(260, { start: 550 }),
+                    });
+
+                    // Ampersand spins in
+                    animate(".intro-ampersand", {
+                        opacity: [0, 1],
+                        rotate: [-30, 0],
+                        scale: [0.4, 1],
+                        duration: 1000,
+                        ease: "spring(1, 55, 12, 0)",
+                        delay: 750,
+                    });
+
+                    // Story lines reveal with stagger + blur
+                    animate(".intro-story-line", {
+                        opacity: [0, 1],
+                        translateY: [30, 0],
+                        duration: 1100,
+                        ease: "cubicBezier(0.16, 1, 0.3, 1)",
+                        delay: stagger(180, { start: 1000 }),
+                    });
+
+                    // Couple photo scales up from slightly below
+                    animate(".intro-photo", {
+                        opacity: [0, 1],
+                        scale: [0.9, 1],
+                        translateY: [40, 0],
+                        duration: 1600,
+                        ease: "cubicBezier(0.16, 1, 0.3, 1)",
+                        delay: 900,
+                    });
+                }
+            },
+            { threshold: 0.15 }
+        );
+
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -111,35 +188,26 @@ export default function Introduction() {
                 {/* === Header: Invitation + Names + Date === */}
                 <div className="text-center mb-20 md:mb-28 space-y-6 md:space-y-8">
 
-                    {/* Gold ornamental rule above */}
-                    <motion.div
-                        initial={{ scaleX: 0, opacity: 0 }}
-                        whileInView={{ scaleX: 1, opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-                        className="section-separator max-w-xs mx-auto mb-8"
+                    {/* Gold ornamental rule above — anime.js controlled */}
+                    <div
+                        className="intro-separator section-separator max-w-xs mx-auto mb-8"
+                        style={{ opacity: 0, willChange: "transform, opacity" }}
                     />
 
                     {/* Invitation line */}
-                    <motion.p
-                        initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
-                        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-                        className="font-arabic text-lg md:text-xl text-wedding-gold/80 tracking-wide"
+                    <p
+                        className="intro-tagline font-arabic text-lg md:text-xl text-wedding-gold/80 tracking-wide"
                         dir="rtl"
+                        style={{ opacity: 0, willChange: "transform, opacity" }}
                     >
                         نتشرف بدعوتكم لحضور حفل زفافنا
-                    </motion.p>
+                    </p>
 
                     {/* Names — monumental with shimmer */}
                     <div className="flex flex-col md:flex-row items-center justify-center md:gap-8 leading-none">
-                        <motion.div
-                            initial={{ opacity: 0, y: 50, scale: 0.88 }}
-                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                            className="relative"
+                        <div
+                            className="intro-name relative"
+                            style={{ opacity: 0, willChange: "transform, opacity" }}
                         >
                             {/* Soft glow behind name */}
                             <div
@@ -149,27 +217,21 @@ export default function Introduction() {
                             <span className="font-arabic text-6xl md:text-8xl lg:text-9xl font-light relative z-10 block text-foreground">
                                 محمد
                             </span>
-                        </motion.div>
+                        </div>
 
                         {/* Ampersand divider */}
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0, rotate: -20 }}
-                            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                            className="flex flex-col items-center my-4 md:my-0"
+                        <div
+                            className="intro-ampersand flex flex-col items-center my-4 md:my-0"
+                            style={{ opacity: 0, willChange: "transform, opacity" }}
                         >
                             <span className="text-2xl md:text-4xl font-light text-wedding-gold/50 font-arabic italic">
                                 &amp;
                             </span>
-                        </motion.div>
+                        </div>
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 50, scale: 0.88 }}
-                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.8, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                            className="relative"
+                        <div
+                            className="intro-name relative"
+                            style={{ opacity: 0, willChange: "transform, opacity" }}
                         >
                             <div
                                 className="absolute inset-0 blur-[30px] opacity-30 pointer-events-none"
@@ -178,37 +240,30 @@ export default function Introduction() {
                             <span className="font-arabic text-6xl md:text-8xl lg:text-9xl font-light relative z-10 block text-foreground">
                                 آية
                             </span>
-                        </motion.div>
+                        </div>
                     </div>
 
                     {/* Date */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1.2, delay: 0.75, ease: "easeOut" }}
-                        className="flex flex-col items-center gap-2 pt-4"
+                    <div className="intro-separator flex flex-col items-center gap-2 pt-4"
+                        style={{ opacity: 0, willChange: "transform, opacity" }}
                     >
                         <div className="flex items-center gap-3 opacity-60">
                             <div className="h-px w-10 bg-wedding-gold/50" />
                             <span className="text-wedding-gold text-xs">◆</span>
                             <div className="h-px w-10 bg-wedding-gold/50" />
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
 
                 {/* === Text above, centered photo below === */}
-                {/* Story text centered above */}
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    className="text-center space-y-4 mb-12"
-                    dir="rtl"
-                >
+                {/* Story text — anime.js controlled */}
+                <div className="text-center space-y-4 mb-12" dir="rtl">
                     {storyLines.map((line, i) => (
-                        <motion.div key={i} variants={lineVariants}>
+                        <div
+                            key={i}
+                            className="intro-story-line"
+                            style={{ opacity: 0, willChange: "transform, opacity" }}
+                        >
                             {line.isDate ? (
                                 <p className="font-arabic text-3xl md:text-5xl text-wedding-gold leading-tight">
                                     {line.text}
@@ -218,9 +273,9 @@ export default function Introduction() {
                                     {line.text}
                                 </p>
                             )}
-                        </motion.div>
+                        </div>
                     ))}
-                </motion.div>
+                </div>
 
                 <div className="flex flex-col items-center">
 
@@ -241,16 +296,14 @@ export default function Introduction() {
                             }}
                         />
 
-                        {/* Main image frame */}
+                        {/* Main image frame — anime.js controlled */}
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.96 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
-                            className="aspect-[3/4] rounded-t-[10rem] overflow-hidden relative z-10"
+                            className="intro-photo aspect-[3/4] rounded-t-[10rem] overflow-hidden relative z-10"
                             style={{
                                 border: "1px solid rgba(212,175,55,0.25)",
                                 boxShadow: "0 30px 80px rgba(0,0,0,0.5), 0 0 60px rgba(212,175,55,0.08)",
+                                opacity: 0,
+                                willChange: "transform, opacity",
                             }}
                         >
                             <motion.img

@@ -279,3 +279,68 @@ html.lenis {
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.05em;
 }
+
+/* ═══════════════════════════════════════════════════
+   MAGICAL CLOUD REVEAL ANIMATIONS
+═══════════════════════════════════════════════════ */
+
+/* Cloud drift — gentle organic floating for idle cloud layers */
+@keyframes cloud-drift-left {
+  0%   { transform: translateX(0px) translateY(0px); }
+  33%  { transform: translateX(-8px) translateY(-4px); }
+  66%  { transform: translateX(4px) translateY(6px); }
+  100% { transform: translateX(0px) translateY(0px); }
+}
+
+@keyframes cloud-drift-right {
+  0%   { transform: translateX(0px) translateY(0px); }
+  33%  { transform: translateX(6px) translateY(-6px); }
+  66%  { transform: translateX(-5px) translateY(4px); }
+  100% { transform: translateX(0px) translateY(0px); }
+}
+
+/* Golden mist pulse — the central haze that glows between clouds */
+@keyframes mist-pulse {
+  0%, 100% { opacity: 0.55; filter: blur(20px); }
+  50%       { opacity: 0.75; filter: blur(25px); }
+}
+
+/* Light ray burst — crepuscular rays through parting clouds */
+@keyframes ray-burst {
+  0%   { opacity: 0; transform: scaleY(0.6); }
+  40%  { opacity: 0.9; transform: scaleY(1); }
+  100% { opacity: 0; transform: scaleY(1.1); }
+}
+
+/* Sparkle twinkle — tiny gold flecks in the clouds */
+@keyframes cloud-sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  50%       { opacity: 1; transform: scale(1.2) rotate(180deg); }
+}
+
+.cloud-sparkle {
+  animation: cloud-sparkle 2.5s ease-in-out infinite;
+}
+
+/* Intro elements start hidden — anime.js reveals them */
+.intro-separator,
+.intro-tagline,
+.intro-name,
+.intro-ampersand,
+.intro-story-line,
+.intro-photo {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Hero elements start hidden — anime.js reveals them */
+.hero-tagline,
+.hero-name,
+.hero-ampersand,
+.hero-date,
+.hero-divider,
+.hero-scroll-indicator,
+.hero-ornament-ring {
+  opacity: 0;
+  will-change: transform, opacity;
+}
