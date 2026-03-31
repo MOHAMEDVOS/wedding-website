@@ -1,5 +1,6 @@
 import HeroContent from "@/components/Hero/HeroContent";
 import BackgroundHero from "@/components/Hero/BackgroundHero";
+import LanguageToggle from "@/components/ui/LanguageToggle";
 import Introduction from "@/components/Introduction/Introduction";
 import Details from "@/components/Details/Details";
 import Location from "@/components/Gallery/Gallery"; // Renamed component but file is still Gallery.tsx
@@ -32,6 +33,7 @@ export default function Home() {
       <section className="relative h-screen w-full overflow-hidden">
         <BackgroundHero />
         <HeroContent />
+        <LanguageToggle />
       </section>
 
       {/* Magical clouds — fixed overlay, parts on scroll */}

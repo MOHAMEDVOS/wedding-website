@@ -9,7 +9,6 @@ import Noise from "@/components/ui/Noise";
 import BackgroundMusic from "@/components/ui/BackgroundMusic";
 import FloatingNote from "@/components/ui/FloatingNote";
 import StarField from "@/components/ui/StarField";
-import LanguageToggle from "@/components/ui/LanguageToggle";
 
 const milchella = localFont({
   src: "../public/Milchella-Regular.ttf",
@@ -69,7 +68,6 @@ export default function RootLayout({
             <StarField />
             <CustomCursor />
             <Noise />
-            <LanguageToggle />
             {children}
             <FloatingNote />
           </SmoothScroll>
