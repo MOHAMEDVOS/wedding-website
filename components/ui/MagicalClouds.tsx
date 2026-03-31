@@ -17,92 +17,147 @@ export default function MagicalClouds() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [scrollY]);
 
-  const progress = useTransform(scrollY, [0, vh * 0.8], [0, 1]);
+  // Smooth spring-like easing via longer input range
+  const progress = useTransform(scrollY, [0, vh * 0.9], [0, 1]);
 
-  // Left/right sweep — tighter on mobile so they overlap more at start
-  const leftX   = useTransform(progress, [0, 1], ["0%", isMobile ? "-100%" : "-110%"]);
-  const rightX  = useTransform(progress, [0, 1], ["0%", isMobile ? "100%" : "110%"]);
-  const leftX2  = useTransform(progress, [0, 1], ["0%", isMobile ? "-80%" : "-90%"]);
-  const rightX2 = useTransform(progress, [0, 1], ["0%", isMobile ? "80%" : "90%"]);
-  const downY   = useTransform(progress, [0, 1], ["0%", "60%"]);
+  // Desktop transforms
+  const dLeftX  = useTransform(progress, [0, 1], ["0%", "-115%"]);
+  const dLeftX2 = useTransform(progress, [0, 1], ["0%", "-92%"]);
+  const dRightX  = useTransform(progress, [0, 1], ["0%", "115%"]);
+  const dRightX2 = useTransform(progress, [0, 1], ["0%", "92%"]);
+  const dDownY   = useTransform(progress, [0, 1], ["0%", "65%"]);
 
-  const opacity    = useTransform(progress, [0, 0.7, 1], [1, 1, 0]);
-  const rayOpacity = useTransform(progress, [0.2, 0.5, 0.85], [0, 0.9, 0]);
+  // Mobile transforms — slower, gentler
+  const mLeftX  = useTransform(progress, [0, 1], ["0%", "-105%"]);
+  const mRightX = useTransform(progress, [0, 1], ["0%", "105%"]);
+  const mDownY  = useTransform(progress, [0, 1], ["0%", "55%"]);
 
-  // On mobile: wider overlap (65% each side) so no centre gap
-  // On desktop: 58% each side with centre puffs filling the seam
-  const sideW   = isMobile ? "70%" : "58%";
-  const sideW2  = isMobile ? "68%" : "55%";
-  const cloudH  = isMobile ? "50vh" : "65vh";
+  // Smooth fade — stays fully opaque longer, then fades
+  const opacity    = useTransform(progress, [0, 0.75, 1], [1, 1, 0]);
+  const rayOpacity = useTransform(progress, [0.25, 0.5, 0.8], [0, 0.85, 0]);
 
+  if (isMobile) {
+    return (
+      <motion.div
+        className="fixed bottom-0 left-0 w-full z-50 pointer-events-none overflow-hidden"
+        style={{ height: "48vh", opacity }}
+      >
+        {/* LEFT — cloud2 only, 72% wide so centre overlaps cleanly */}
+        <motion.div
+          className="absolute top-0 left-0"
+          style={{ width: "72%", height: "100%", x: mLeftX, willChange: "transform" }}
+        >
+          <img
+            src="/cloud2.png" alt="" draggable={false}
+            className="w-full h-full object-cover object-right"
+          />
+        </motion.div>
+
+        {/* RIGHT — cloud2 only, mirrored */}
+        <motion.div
+          className="absolute top-0 right-0"
+          style={{ width: "72%", height: "100%", x: mRightX, willChange: "transform" }}
+        >
+          <img
+            src="/cloud2.png" alt="" draggable={false}
+            className="w-full h-full object-cover object-left scale-x-[-1]"
+          />
+        </motion.div>
+
+        {/* CENTRE BOTTOM puff — cloud2, natural top, fills seam */}
+        <motion.div
+          className="absolute bottom-0 left-[18%]"
+          style={{ width: "64%", height: "62%", y: mDownY, willChange: "transform" }}
+        >
+          <img
+            src="/cloud2.png" alt="" draggable={false}
+            className="w-full h-full object-contain object-bottom"
+          />
+        </motion.div>
+
+        {/* Ray */}
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            background: "conic-gradient(from 270deg at 50% 110%, transparent 30%, rgba(212,175,55,0.12) 42%, rgba(255,240,180,0.2) 50%, rgba(212,175,55,0.12) 58%, transparent 70%)",
+            filter: "blur(12px)",
+            opacity: rayOpacity,
+          }}
+        />
+      </motion.div>
+    );
+  }
+
+  // ── DESKTOP ──────────────────────────────────────────────
   return (
     <motion.div
       className="fixed bottom-0 left-0 w-full z-50 pointer-events-none overflow-hidden"
-      style={{ height: cloudH, opacity }}
+      style={{ height: "65vh", opacity }}
     >
-      {/* ═══ LEFT HALF — sweeps left ═══ */}
-
+      {/* LEFT main */}
       <motion.div
         className="absolute top-0 left-0"
-        style={{ width: sideW, height: "100%", x: leftX, willChange: "transform" }}
+        style={{ width: "58%", height: "100%", x: dLeftX, willChange: "transform" }}
       >
         <img src="/clouds.png" alt="" draggable={false}
           className="w-full h-full object-cover object-right" />
       </motion.div>
 
+      {/* LEFT depth */}
       <motion.div
         className="absolute bottom-0 left-0"
-        style={{ width: sideW2, height: "65%", x: leftX2, willChange: "transform" }}
+        style={{ width: "55%", height: "65%", x: dLeftX2, willChange: "transform" }}
       >
         <img src="/cloud2.png" alt="" draggable={false}
           className="w-full h-full object-cover object-right" style={{ opacity: 0.9 }} />
       </motion.div>
 
-      {/* ═══ RIGHT HALF — sweeps right ═══ */}
-
+      {/* RIGHT main */}
       <motion.div
         className="absolute top-0 right-0"
-        style={{ width: sideW, height: "100%", x: rightX, willChange: "transform" }}
+        style={{ width: "58%", height: "100%", x: dRightX, willChange: "transform" }}
       >
         <img src="/clouds.png" alt="" draggable={false}
           className="w-full h-full object-cover object-left scale-x-[-1]" />
       </motion.div>
 
+      {/* RIGHT depth */}
       <motion.div
         className="absolute bottom-0 right-0"
-        style={{ width: sideW2, height: "65%", x: rightX2, willChange: "transform" }}
+        style={{ width: "55%", height: "65%", x: dRightX2, willChange: "transform" }}
       >
         <img src="/cloud2.png" alt="" draggable={false}
           className="w-full h-full object-cover object-left scale-x-[-1]" style={{ opacity: 0.9 }} />
       </motion.div>
 
-      {/* ═══ CENTRE BOTTOM — fills the seam ═══ */}
-
+      {/* CENTRE left puff */}
       <motion.div
         className="absolute bottom-0"
-        style={{ left: isMobile ? "10%" : "15%", width: isMobile ? "45%" : "40%", height: isMobile ? "50%" : "55%", y: downY, willChange: "transform" }}
+        style={{ left: "15%", width: "40%", height: "55%", y: dDownY, willChange: "transform" }}
       >
         <img src="/clouds.png" alt="" draggable={false}
           className="w-full h-full object-contain object-bottom" />
       </motion.div>
 
+      {/* CENTRE main puff */}
       <motion.div
         className="absolute bottom-0"
-        style={{ left: isMobile ? "20%" : "28%", width: isMobile ? "60%" : "44%", height: isMobile ? "58%" : "62%", y: downY, willChange: "transform" }}
+        style={{ left: "28%", width: "44%", height: "62%", y: dDownY, willChange: "transform" }}
       >
         <img src="/cloud2.png" alt="" draggable={false}
           className="w-full h-full object-contain object-bottom scale-x-[-1]" />
       </motion.div>
 
+      {/* CENTRE right puff */}
       <motion.div
         className="absolute bottom-0"
-        style={{ right: isMobile ? "10%" : "15%", width: isMobile ? "45%" : "40%", height: isMobile ? "50%" : "55%", y: downY, willChange: "transform" }}
+        style={{ right: "15%", width: "40%", height: "55%", y: dDownY, willChange: "transform" }}
       >
         <img src="/clouds.png" alt="" draggable={false}
           className="w-full h-full object-contain object-bottom scale-x-[-1]" />
       </motion.div>
 
-      {/* ═══ GOLDEN LIGHT RAY ═══ */}
+      {/* Ray */}
       <motion.div
         className="absolute inset-0"
         style={{
