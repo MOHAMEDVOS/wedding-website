@@ -32,49 +32,8 @@ export default function MagicalClouds() {
   // Don't render until client — avoids SSR/hydration mismatch
   if (!mounted) return null;
 
-  if (isMobile) {
-    return (
-      <motion.div
-        className="fixed bottom-0 left-0 w-full z-50 pointer-events-none"
-        style={{ height: "52vh", opacity }}
-      >
-        {/* LEFT — sweeps left, wide enough to cover full left half */}
-        <motion.div
-          className="absolute bottom-0 left-0"
-          style={{ width: "60%", height: "100%", x: leftX, willChange: "transform" }}
-        >
-          <img src="/clouds.png" alt="" draggable={false}
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "right bottom", display: "block" }} />
-        </motion.div>
-
-        {/* RIGHT — sweeps right, mirrored */}
-        <motion.div
-          className="absolute bottom-0 right-0"
-          style={{ width: "60%", height: "100%", x: rightX, willChange: "transform" }}
-        >
-          <img src="/clouds.png" alt="" draggable={false}
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "left bottom", transform: "scaleX(-1)", display: "block" }} />
-        </motion.div>
-
-        {/* CENTRE — cloud2, drops down, seals the middle seam */}
-        <motion.div
-          className="absolute bottom-0"
-          style={{ left: "10%", width: "80%", height: "65%", y: downY, willChange: "transform" }}
-        >
-          <img src="/cloud2.png" alt="" draggable={false}
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center bottom", display: "block" }} />
-        </motion.div>
-
-        {/* Ray */}
-        <motion.div className="absolute inset-0"
-          style={{
-            background: "conic-gradient(from 270deg at 50% 110%, transparent 28%, rgba(212,175,55,0.12) 40%, rgba(255,240,180,0.2) 50%, rgba(212,175,55,0.12) 60%, transparent 72%)",
-            filter: "blur(14px)", opacity: rayOpacity,
-          }}
-        />
-      </motion.div>
-    );
-  }
+  // No clouds on mobile
+  if (isMobile) return null;
 
   // ── DESKTOP ──────────────────────────────────────────────
   return (
