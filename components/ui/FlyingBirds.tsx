@@ -21,6 +21,9 @@ export default function FlyingBirds() {
         const mobileCheck = window.innerWidth < 768;
         setIsMobile(mobileCheck);
 
+        // No birds on mobile — reduces lag
+        if (mobileCheck) return;
+
         // Generate random birds
         const birdCount = 5;
         const newBirds: BirdProps[] = Array.from({ length: birdCount }, (_, i) => ({

@@ -17,57 +17,60 @@ export default function MagicalClouds() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [scrollY]);
 
-  // Smooth spring-like easing via longer input range
+  // Extended range for smoother feel
   const progress = useTransform(scrollY, [0, vh * 0.9], [0, 1]);
 
-  // Desktop transforms
-  const dLeftX  = useTransform(progress, [0, 1], ["0%", "-115%"]);
-  const dLeftX2 = useTransform(progress, [0, 1], ["0%", "-92%"]);
+  // Desktop
+  const dLeftX   = useTransform(progress, [0, 1], ["0%", "-115%"]);
+  const dLeftX2  = useTransform(progress, [0, 1], ["0%", "-95%"]);
   const dRightX  = useTransform(progress, [0, 1], ["0%", "115%"]);
-  const dRightX2 = useTransform(progress, [0, 1], ["0%", "92%"]);
-  const dDownY   = useTransform(progress, [0, 1], ["0%", "65%"]);
+  const dRightX2 = useTransform(progress, [0, 1], ["0%", "95%"]);
+  const dDownY   = useTransform(progress, [0, 1], ["0%", "70%"]);
 
-  // Mobile transforms — slower, gentler
-  const mLeftX  = useTransform(progress, [0, 1], ["0%", "-105%"]);
-  const mRightX = useTransform(progress, [0, 1], ["0%", "105%"]);
-  const mDownY  = useTransform(progress, [0, 1], ["0%", "55%"]);
+  // Mobile — gentler movement
+  const mLeftX  = useTransform(progress, [0, 1], ["0%", "-108%"]);
+  const mRightX = useTransform(progress, [0, 1], ["0%", "108%"]);
+  const mDownY  = useTransform(progress, [0, 1], ["0%", "60%"]);
 
-  // Smooth fade — stays fully opaque longer, then fades
-  const opacity    = useTransform(progress, [0, 0.75, 1], [1, 1, 0]);
-  const rayOpacity = useTransform(progress, [0.25, 0.5, 0.8], [0, 0.85, 0]);
+  // Stays solid until 80% scrolled, then fades
+  const opacity    = useTransform(progress, [0, 0.8, 1], [1, 1, 0]);
+  const rayOpacity = useTransform(progress, [0.25, 0.5, 0.82], [0, 0.85, 0]);
 
   if (isMobile) {
     return (
+      // NO overflow-hidden here — that was clipping the clouds
       <motion.div
-        className="fixed bottom-0 left-0 w-full z-50 pointer-events-none overflow-hidden"
-        style={{ height: "48vh", opacity }}
+        className="fixed bottom-0 left-0 w-full z-50 pointer-events-none"
+        style={{ height: "55vh", opacity }}
       >
-        {/* LEFT — cloud2 only, 72% wide so centre overlaps cleanly */}
+        {/* LEFT — cloud2, 75% wide, anchored bottom-left */}
         <motion.div
-          className="absolute top-0 left-0"
-          style={{ width: "72%", height: "100%", x: mLeftX, willChange: "transform" }}
+          className="absolute bottom-0 left-0"
+          style={{ width: "75%", height: "100%", x: mLeftX, willChange: "transform" }}
         >
           <img
             src="/cloud2.png" alt="" draggable={false}
-            className="w-full h-full object-cover object-right"
+            className="w-full h-full object-contain object-bottom-right"
+            style={{ objectPosition: "right bottom" }}
           />
         </motion.div>
 
-        {/* RIGHT — cloud2 only, mirrored */}
+        {/* RIGHT — cloud2, 75% wide, mirrored, anchored bottom-right */}
         <motion.div
-          className="absolute top-0 right-0"
-          style={{ width: "72%", height: "100%", x: mRightX, willChange: "transform" }}
+          className="absolute bottom-0 right-0"
+          style={{ width: "75%", height: "100%", x: mRightX, willChange: "transform" }}
         >
           <img
             src="/cloud2.png" alt="" draggable={false}
-            className="w-full h-full object-cover object-left scale-x-[-1]"
+            className="w-full h-full object-contain scale-x-[-1]"
+            style={{ objectPosition: "left bottom" }}
           />
         </motion.div>
 
-        {/* CENTRE BOTTOM puff — cloud2, natural top, fills seam */}
+        {/* CENTRE bottom — cloud2, full natural shape, drops down */}
         <motion.div
-          className="absolute bottom-0 left-[18%]"
-          style={{ width: "64%", height: "62%", y: mDownY, willChange: "transform" }}
+          className="absolute bottom-0 left-[12%]"
+          style={{ width: "76%", height: "70%", y: mDownY, willChange: "transform" }}
         >
           <img
             src="/cloud2.png" alt="" draggable={false}
@@ -80,7 +83,7 @@ export default function MagicalClouds() {
           className="absolute inset-0"
           style={{
             background: "conic-gradient(from 270deg at 50% 110%, transparent 30%, rgba(212,175,55,0.12) 42%, rgba(255,240,180,0.2) 50%, rgba(212,175,55,0.12) 58%, transparent 70%)",
-            filter: "blur(12px)",
+            filter: "blur(14px)",
             opacity: rayOpacity,
           }}
         />
@@ -91,7 +94,7 @@ export default function MagicalClouds() {
   // ── DESKTOP ──────────────────────────────────────────────
   return (
     <motion.div
-      className="fixed bottom-0 left-0 w-full z-50 pointer-events-none overflow-hidden"
+      className="fixed bottom-0 left-0 w-full z-50 pointer-events-none"
       style={{ height: "65vh", opacity }}
     >
       {/* LEFT main */}
