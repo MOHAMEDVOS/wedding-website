@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLang } from "@/components/providers/language-context";
 
 export default function Location() {
-
+    const { isAr } = useLang();
     return (
         <section className="py-24 md:py-32 bg-background relative overflow-hidden">
             {/* Pulsing aurora glow */}
@@ -35,8 +36,8 @@ export default function Location() {
                             <div className="h-px w-6 bg-wedding-gold/30" />
                         </div>
 
-                        <span className="shimmer-text-live font-arabic text-3xl md:text-4xl block" dir="rtl">
-                            موقع الحفل
+                        <span className="shimmer-text-live font-arabic text-3xl md:text-4xl block" dir={isAr ? "rtl" : "ltr"}>
+                            {isAr ? "موقع الحفل" : "Venue"}
                         </span>
 
                         <div className="flex items-center gap-2">
@@ -73,7 +74,7 @@ export default function Location() {
                             boxShadow:
                                 "0 24px 60px rgba(0,0,0,0.35), 0 0 40px rgba(212,175,55,0.05), inset 0 1px 0 rgba(255,255,255,0.04)",
                         }}
-                        dir="rtl"
+                        dir={isAr ? "rtl" : "ltr"}
                     >
                         {/* Top border highlight */}
                         <div
@@ -83,24 +84,26 @@ export default function Location() {
 
                         {/* Venue name */}
                         <div className="space-y-3">
-                            <div className="flex items-center justify-end gap-3 mb-1">
+                            <div className={`flex items-center ${isAr ? "justify-end" : "justify-start"} gap-3 mb-1`}>
                                 <div className="h-px w-8 bg-wedding-gold/30" />
                                 <span className="text-wedding-gold/40 text-[10px]">◆</span>
                             </div>
                             <h3 className="font-arabic text-2xl md:text-3xl text-foreground/95"
                                 style={{ textShadow: "0 0 20px rgba(212,175,55,0.1)" }}>
-                                فليت كلوب الزمالك
+                                {isAr ? "فليت كلوب الزمالك" : "Fleet Club / Zamalek"}
                             </h3>
                         </div>
 
                         {/* Gold separator */}
-                        <div className="flex items-center justify-end gap-3">
-                            <div className="h-px w-full bg-gradient-to-l from-wedding-gold/40 to-transparent" />
+                        <div className={`flex items-center ${isAr ? "justify-end" : "justify-start"} gap-3`}>
+                            <div className={`h-px w-full ${isAr ? "bg-gradient-to-l" : "bg-gradient-to-r"} from-wedding-gold/40 to-transparent`} />
                         </div>
 
                         {/* Location */}
                         <div className="space-y-1">
-                            <p className="font-arabic text-xl text-foreground/60">القاهرة، مصر</p>
+                            <p className="font-arabic text-xl text-foreground/60">
+                                {isAr ? "القاهرة، مصر" : "Cairo, Egypt"}
+                            </p>
                         </div>
 
                         {/* Bottom decoration */}
@@ -179,7 +182,7 @@ export default function Location() {
                                 className="font-arabic text-sm font-bold relative z-10"
                                 style={{ color: "#1A0E06" }}
                             >
-                                احصل على الاتجاهات
+                                {isAr ? "احصل على الاتجاهات" : "Get Directions"}
                             </span>
                         </motion.a>
                     </motion.div>

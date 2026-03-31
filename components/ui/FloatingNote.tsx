@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { X, Send } from "lucide-react";
+import { useLang } from "@/components/providers/language-context";
 
 export default function FloatingNote() {
     const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +28,7 @@ export default function FloatingNote() {
         setSparkles(generatedSparkles);
     }, []);
 
+    const { isAr } = useLang();
     const [sending, setSending] = useState(false);
     const [sent, setSent] = useState(false);
 
@@ -132,7 +134,7 @@ export default function FloatingNote() {
                             boxShadow: "0 0 12px rgba(212,175,55,0.2)",
                         }}
                     >
-                        اضغط هنا ✦
+                        {isAr ? "اضغط هنا ✦" : "Click here ✦"}
                     </span>
                     {/* Arrow pointing down */}
                     <motion.span
@@ -223,7 +225,7 @@ export default function FloatingNote() {
                                                     className="flex flex-col items-center space-y-4 py-8"
                                                 >
                                                     <span className="text-4xl">✨</span>
-                                                    <p className="font-amiri text-[#4b2e1f] text-lg">!شكراً ليك</p>
+                                                    <p className="font-amiri text-[#4b2e1f] text-lg">{isAr ? "!شكراً ليك" : "Thank you!"}</p>
                                                 </motion.div>
                                             ) : (
                                             <>
@@ -233,8 +235,8 @@ export default function FloatingNote() {
                                                 className="flex flex-col items-center justify-center w-full space-y-8 md:space-y-10"
                                             >
                                                 <div className="space-y-4 text-center">
-                                                    <h3 className="font-amiri text-[#4b2e1f] text-xl md:text-2xl leading-relaxed font-bold">
-                                                        إيه الأغنية اللي هتخليك تقوم من مكانك؟
+                                                    <h3 className="font-amiri text-[#4b2e1f] text-xl md:text-2xl leading-relaxed font-bold" dir={isAr ? "rtl" : "ltr"}>
+                                                        {isAr ? "إيه الأغنية اللي هتخليك تقوم من مكانك؟" : "What song will get you on the dance floor?"}
                                                     </h3>
                                                 </div>
 
@@ -244,7 +246,7 @@ export default function FloatingNote() {
                                                             type="text"
                                                             value={name}
                                                             onChange={(e) => setName(e.target.value)}
-                                                            placeholder="اسمك..."
+                                                            placeholder={isAr ? "اسمك..." : "Your name..."}
                                                             className="w-full bg-transparent border-b-2 border-[#4b2e1f]/20 focus:border-[#4b2e1f]/40 outline-none text-[#4b2e1f] font-scripalt text-lg py-2 px-1 text-center transition-colors placeholder:text-[#4b2e1f]/30 italic"
                                                             disabled={sending}
                                                         />
@@ -254,7 +256,7 @@ export default function FloatingNote() {
                                                             type="text"
                                                             value={song}
                                                             onChange={(e) => setSong(e.target.value)}
-                                                            placeholder="أغنيتك المفضلة..."
+                                                            placeholder={isAr ? "أغنيتك المفضلة..." : "Your favourite song..."}
                                                             className="w-full bg-transparent border-b-2 border-[#4b2e1f]/20 focus:border-[#4b2e1f]/40 outline-none text-[#4b2e1f] font-scripalt text-xl py-2 px-1 text-center transition-colors placeholder:text-[#4b2e1f]/30 italic"
                                                             required
                                                             disabled={sending}
@@ -262,6 +264,7 @@ export default function FloatingNote() {
                                                     </div>
 
                                                     {/* Wax Seal Submit Button */}
+                                                    <div className="pt-10" />
                                                     <button
                                                         type="submit"
                                                         disabled={sending}
@@ -269,7 +272,7 @@ export default function FloatingNote() {
                                                     >
                                                         <div className="absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                                             <span className="font-scripalt text-[#4b2e1f]/60 text-xs italic tracking-widest uppercase">
-                                                                {sending ? "جاري الإرسال..." : "اختم إجابتك"}
+                                                                {sending ? (isAr ? "جاري الإرسال..." : "Sending...") : (isAr ? "اختم إجابتك" : "Seal & send")}
                                                             </span>
                                                         </div>
 

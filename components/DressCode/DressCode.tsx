@@ -2,12 +2,23 @@
 
 import { motion } from "framer-motion";
 import { useRef } from "react";
+import { useLang } from "@/components/providers/language-context";
 
-const groomColors = ["#c9b87a", "#b8a55e", "#a08840"];
-const brideColors  = ["#3d1a0e", "#4a2518", "#2e1710"];
+const groomColors = [
+    { hex: "#c9b87a", labelAr: "بيج", labelEn: "Beige" },
+    { hex: "#b8a55e", labelAr: "بيج", labelEn: "Beige" },
+    { hex: "#a08840", labelAr: "بيج", labelEn: "Beige" },
+];
+
+const brideColors = [
+    { hex: "#3d1a0e", labelAr: "بني", labelEn: "Brown" },
+    { hex: "#4a2518", labelAr: "بني", labelEn: "Brown" },
+    { hex: "#2e1710", labelAr: "بني", labelEn: "Brown" },
+];
 
 export default function DressCode() {
     const sectionRef = useRef<HTMLDivElement>(null);
+    const { isAr } = useLang();
 
     return (
         <section ref={sectionRef} className="py-32 bg-background relative overflow-hidden">
@@ -37,9 +48,11 @@ export default function DressCode() {
                     </div>
                     <h2 className="font-arabic text-5xl md:text-7xl text-foreground mb-3"
                         style={{ textShadow: "0 0 40px rgba(212,175,55,0.2)" }}>
-                        كود اللبس
+                        {isAr ? "كود اللبس" : "Dress Code"}
                     </h2>
-                    <p className="font-arabic text-lg text-wedding-gold/60">الألوان المقترحة للضيوف</p>
+                    <p className="font-arabic text-lg text-wedding-gold/60">
+                        {isAr ? "الألوان المقترحة للضيوف" : "Suggested colours for guests"}
+                    </p>
                 </motion.div>
 
                 {/* Two columns */}
@@ -47,38 +60,44 @@ export default function DressCode() {
 
                     {/* GROOM */}
                     <motion.div
-                        className="flex flex-col items-center gap-10 w-full md:w-[42%]"
+                        className="flex flex-col items-center gap-6 w-full md:w-[42%]"
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                     >
-                        <motion.h3
-                            className="font-arabic text-2xl md:text-3xl text-wedding-gold/80"
+                        <motion.div
+                            className="flex flex-col items-center gap-1 w-full"
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 1, delay: 0.3 }}
                         >
-                            الرجال
-                        </motion.h3>
+                            <h3 className="font-arabic text-2xl md:text-3xl text-wedding-gold/80 text-center w-full" dir="rtl">
+                                {isAr ? "الرجال" : "Gentlemen"}
+                            </h3>
+                            <span className="font-arabic text-base text-foreground/40 text-center w-full block" dir="rtl">
+                                {isAr ? "بيج" : "Beige"}
+                            </span>
+                        </motion.div>
 
                         {/* Color dots */}
                         <motion.div
-                            className="flex items-center gap-5"
+                            className="flex items-center justify-center gap-5"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 1, delay: 0.5 }}
                         >
-                            {groomColors.map((c, i) => (
+                            {groomColors.map(({ hex }, i) => (
                                 <motion.div
-                                    key={c}
+                                    key={hex}
                                     className="rounded-full"
                                     style={{
-                                        backgroundColor: c,
+                                        backgroundColor: hex,
                                         width: i === 1 ? 56 : 44,
                                         height: i === 1 ? 56 : 44,
+                                        boxShadow: `0 4px 16px ${hex}55`,
                                     }}
                                     whileHover={{ scale: 1.2 }}
                                     transition={{ duration: 0.3 }}
@@ -96,38 +115,44 @@ export default function DressCode() {
 
                     {/* BRIDE */}
                     <motion.div
-                        className="flex flex-col items-center gap-10 w-full md:w-[42%]"
+                        className="flex flex-col items-center gap-6 w-full md:w-[42%]"
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                     >
-                        <motion.h3
-                            className="font-arabic text-2xl md:text-3xl text-wedding-gold/80"
+                        <motion.div
+                            className="flex flex-col items-center gap-1 w-full"
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 1, delay: 0.3 }}
                         >
-                            السيدات
-                        </motion.h3>
+                            <h3 className="font-arabic text-2xl md:text-3xl text-wedding-gold/80 text-center w-full" dir="rtl">
+                                {isAr ? "السيدات" : "Ladies"}
+                            </h3>
+                            <span className="font-arabic text-base text-foreground/40 text-center w-full block" dir="rtl">
+                                {isAr ? "بني" : "Brown"}
+                            </span>
+                        </motion.div>
 
                         {/* Color dots */}
                         <motion.div
-                            className="flex items-center gap-5"
+                            className="flex items-center justify-center gap-5"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 1, delay: 0.5 }}
                         >
-                            {brideColors.map((c, i) => (
+                            {brideColors.map(({ hex }, i) => (
                                 <motion.div
-                                    key={c}
+                                    key={hex}
                                     className="rounded-full"
                                     style={{
-                                        backgroundColor: c,
+                                        backgroundColor: hex,
                                         width: i === 1 ? 56 : 44,
                                         height: i === 1 ? 56 : 44,
+                                        boxShadow: `0 4px 16px ${hex}88`,
                                     }}
                                     whileHover={{ scale: 1.2 }}
                                     transition={{ duration: 0.3 }}

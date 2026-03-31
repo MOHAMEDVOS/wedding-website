@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useRef } from "react";
+import { useLang } from "@/components/providers/language-context";
 
 // A single floating gold dust particle
 function GoldParticle({ index }: { index: number }) {
@@ -39,6 +40,7 @@ function GoldParticle({ index }: { index: number }) {
 export default function HeroContent() {
     const containerRef = useRef<HTMLDivElement>(null);
     const particleCount = 14;
+    const { isAr } = useLang();
 
     return (
         <div
@@ -64,9 +66,9 @@ export default function HeroContent() {
                     animate={{ opacity: [0.5, 1, 0.5] }}
                     transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                     className="font-arabic text-sm tracking-[0.25em] text-wedding-gold/70"
-                    style={{ direction: "rtl" }}
+                    style={{ direction: isAr ? "rtl" : "ltr" }}
                 >
-                    مرر لأسفل
+                    {isAr ? "مرر لأسفل" : "Scroll"}
                 </motion.span>
 
                 {/* Breathing vertical line */}

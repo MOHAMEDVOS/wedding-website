@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useLang } from "@/components/providers/language-context";
 
 function getTimeLeft() {
     const target = new Date("2026-06-28T15:00:00").getTime();
@@ -16,14 +17,15 @@ function getTimeLeft() {
 }
 
 const units = [
-    { key: "days",    label: "أيام"   },
-    { key: "hours",   label: "ساعات"  },
-    { key: "minutes", label: "دقائق"  },
-    { key: "seconds", label: "ثواني"  },
+    { key: "days",    labelAr: "أيام",    labelEn: "Days"    },
+    { key: "hours",   labelAr: "ساعات",   labelEn: "Hours"   },
+    { key: "minutes", labelAr: "دقائق",   labelEn: "Minutes" },
+    { key: "seconds", labelAr: "ثواني",   labelEn: "Seconds" },
 ];
 
 export default function Countdown() {
     const [time, setTime] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+    const { isAr } = useLang();
 
     useEffect(() => {
         setTime(getTimeLeft());
@@ -63,16 +65,17 @@ export default function Countdown() {
 
                     <h2 className="font-arabic text-5xl md:text-7xl text-foreground mb-4"
                         style={{ textShadow: "0 0 40px rgba(212,175,55,0.25)" }}>
-                        يوم الزفاف
+                        {isAr ? "يوم الزفاف" : "Wedding Day"}
                     </h2>
                     <p className="font-arabic text-sm text-foreground/40 tracking-widest">
-                        القاهرة، مصر
+                        {isAr ? "القاهرة، مصر" : "Cairo, Egypt"}
                     </p>
                 </motion.div>
 
                 {/* Countdown rings */}
                 <div className="flex flex-wrap justify-center gap-8 md:gap-12">
-                    {units.map(({ key, label }, i) => {
+                    {units.map(({ key, labelAr, labelEn }, i) => {
+                        const label = isAr ? labelAr : labelEn;
                         const val = String(time[key as keyof typeof time]).padStart(2, "0");
                         return (
                             <motion.div
@@ -158,7 +161,9 @@ export default function Countdown() {
                         <span className="text-wedding-gold text-xs">◆</span>
                         <div className="h-px w-16 bg-wedding-gold" />
                     </div>
-                    <p className="font-arabic text-xs text-foreground/30 tracking-widest mt-1">نراكم هناك</p>
+                    <p className="font-arabic text-xs text-foreground/30 tracking-widest mt-1">
+                        {isAr ? "نراكم هناك" : "See you there"}
+                    </p>
                 </motion.div>
 
             </div>

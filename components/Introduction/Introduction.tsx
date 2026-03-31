@@ -5,6 +5,7 @@ import { useRef, useEffect } from "react";
 import ImagePlaceholder from "../ui/ImagePlaceholder";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { animate, stagger } from "animejs";
+import { useLang } from "@/components/providers/language-context";
 
 // Corner ornament SVG — delicate gold filigree
 function CornerOrnament({ className }: { className?: string }) {
@@ -33,16 +34,22 @@ function CornerOrnament({ className }: { className?: string }) {
     );
 }
 
-// Staggered text reveal line by line
-const storyLines = [
+const storyLinesAr = [
     { text: "الأحد ٢٨ يونيو ٢٠٢٦", isDate: true },
     { text: "اليوم الذي نصبح فيه واحداً، محاطين بمن نحب.", isDate: false },
+];
+
+const storyLinesEn = [
+    { text: "Sunday, June 28, 2026", isDate: true },
+    { text: "The day we become one, surrounded by those we love.", isDate: false },
 ];
 
 export default function Introduction() {
     const containerRef = useRef<HTMLDivElement>(null);
     const isMobile = useMediaQuery('(max-width: 768px)');
     const hasRevealed = useRef(false);
+    const { isAr } = useLang();
+    const storyLines = isAr ? storyLinesAr : storyLinesEn;
 
     // Anime.js reveal — fires once when section enters viewport (clouds finish parting)
     useEffect(() => {
@@ -197,10 +204,10 @@ export default function Introduction() {
                     {/* Invitation line */}
                     <p
                         className="intro-tagline font-arabic text-lg md:text-xl text-wedding-gold/80 tracking-wide"
-                        dir="rtl"
+                        dir={isAr ? "rtl" : "ltr"}
                         style={{ opacity: 0, willChange: "transform, opacity" }}
                     >
-                        نتشرف بدعوتكم لحضور حفل زفافنا
+                        {isAr ? "نتشرف بدعوتكم لحضور حفل زفافنا" : "We joyfully invite you to celebrate our wedding"}
                     </p>
 
                     {/* Names — monumental with shimmer */}
@@ -214,8 +221,8 @@ export default function Introduction() {
                                 className="absolute inset-0 blur-[30px] opacity-30 pointer-events-none"
                                 style={{ background: "radial-gradient(circle, rgba(212,175,55,0.5) 0%, transparent 70%)" }}
                             />
-                            <span className="font-arabic text-6xl md:text-8xl lg:text-9xl font-light relative z-10 block text-foreground">
-                                محمد
+                            <span className={`relative z-10 block text-foreground font-light ${isAr ? "font-arabic text-6xl md:text-8xl lg:text-9xl" : "font-great-victorian text-5xl md:text-7xl lg:text-8xl"}`}>
+                                {isAr ? "محمد" : "Mohamed"}
                             </span>
                         </div>
 
@@ -237,8 +244,8 @@ export default function Introduction() {
                                 className="absolute inset-0 blur-[30px] opacity-30 pointer-events-none"
                                 style={{ background: "radial-gradient(circle, rgba(212,175,55,0.5) 0%, transparent 70%)" }}
                             />
-                            <span className="font-arabic text-6xl md:text-8xl lg:text-9xl font-light relative z-10 block text-foreground">
-                                آية
+                            <span className={`relative z-10 block text-foreground font-light ${isAr ? "font-arabic text-6xl md:text-8xl lg:text-9xl" : "font-great-victorian text-5xl md:text-7xl lg:text-8xl"}`}>
+                                {isAr ? "آية" : "Aya"}
                             </span>
                         </div>
                     </div>
@@ -257,7 +264,7 @@ export default function Introduction() {
 
                 {/* === Text above, centered photo below === */}
                 {/* Story text — anime.js controlled */}
-                <div className="text-center space-y-4 mb-12" dir="rtl">
+                <div className="text-center space-y-4 mb-12" dir={isAr ? "rtl" : "ltr"}>
                     {storyLines.map((line, i) => (
                         <div
                             key={i}

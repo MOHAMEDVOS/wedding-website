@@ -2,26 +2,36 @@
 
 import { motion } from "framer-motion";
 import { Clock, MapPin, Sparkles } from "lucide-react";
+import { useLang } from "@/components/providers/language-context";
 
 const details = [
     {
         icon: Clock,
         titleAr: "مراسم الزفاف",
         descAr: "الثالثة مساءً",
-        subAr: "يرجى الحضور قبل الموعد بـ ١٥ دقيقة"
+        subAr: "يرجى الحضور قبل الموعد بـ ١٥ دقيقة",
+        titleEn: "Wedding Ceremony",
+        descEn: "3:00 PM",
+        subEn: "Please arrive 15 minutes early",
     },
     {
         icon: MapPin,
         titleAr: "حفل الاستقبال",
         descAr: "فندق بلازا",
-        subAr: "قاعة الاحتفالات الكبرى"
+        subAr: "قاعة الاحتفالات الكبرى",
+        titleEn: "Reception",
+        descEn: "Fleet Club El Gezirah",
+        subEn: "Grand Celebration Hall",
     },
     {
         icon: Sparkles,
         titleAr: "الملابس",
         descAr: "ملابس سهرة رسمية",
-        subAr: "أنيق ورسمي"
-    }
+        subAr: "أنيق ورسمي",
+        titleEn: "Dress Code",
+        descEn: "Formal Evening Wear",
+        subEn: "Elegant & Formal",
+    },
 ];
 
 const containerVariants = {
@@ -42,6 +52,7 @@ const cardVariants = {
 };
 
 export default function Details() {
+    const { isAr } = useLang();
     return (
         <section className="py-24 bg-background relative overflow-hidden">
             {/* Background texture */}
@@ -79,8 +90,8 @@ export default function Details() {
                         <span className="text-wedding-gold/40 text-[10px]">✦</span>
                         <div className="h-px w-12 bg-gradient-to-l from-transparent to-wedding-gold/40" />
                     </div>
-                    <span className="shimmer-text font-arabic text-4xl block" dir="rtl">
-                        تفاصيل الحفل
+                    <span className="shimmer-text font-arabic text-4xl block" dir={isAr ? "rtl" : "ltr"}>
+                        {isAr ? "تفاصيل الحفل" : "Event Details"}
                     </span>
                     <motion.div
                         initial={{ scaleX: 0 }}
@@ -137,16 +148,16 @@ export default function Details() {
                                 <div className="h-px w-6 bg-wedding-gold/50" />
                             </div>
 
-                            <h3 className="font-arabic text-2xl mb-3 text-wedding-gold/80 group-hover:text-wedding-gold transition-colors duration-500" dir="rtl">
-                                {item.titleAr}
+                            <h3 className="font-arabic text-2xl mb-3 text-wedding-gold/80 group-hover:text-wedding-gold transition-colors duration-500" dir={isAr ? "rtl" : "ltr"}>
+                                {isAr ? item.titleAr : item.titleEn}
                             </h3>
 
-                            <p className="font-arabic text-lg tracking-wide text-foreground/80 mb-3" dir="rtl">
-                                {item.descAr}
+                            <p className="font-arabic text-lg tracking-wide text-foreground/80 mb-3" dir={isAr ? "rtl" : "ltr"}>
+                                {isAr ? item.descAr : item.descEn}
                             </p>
 
-                            <p className="font-arabic text-foreground/40 text-sm" dir="rtl">
-                                {item.subAr}
+                            <p className="font-arabic text-foreground/40 text-sm" dir={isAr ? "rtl" : "ltr"}>
+                                {isAr ? item.subAr : item.subEn}
                             </p>
 
                             {/* Bottom corner accent on hover */}

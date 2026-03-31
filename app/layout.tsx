@@ -3,11 +3,13 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import SmoothScroll from "@/components/providers/smooth-scroll";
+import { LanguageProvider } from "@/components/providers/language-context";
 import CustomCursor from "@/components/ui/CustomCursor";
 import Noise from "@/components/ui/Noise";
 import BackgroundMusic from "@/components/ui/BackgroundMusic";
 import FloatingNote from "@/components/ui/FloatingNote";
 import StarField from "@/components/ui/StarField";
+import LanguageToggle from "@/components/ui/LanguageToggle";
 
 const milchella = localFont({
   src: "../public/Milchella-Regular.ttf",
@@ -52,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="lenis">
+    <html lang="ar" suppressHydrationWarning className="lenis">
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
@@ -62,13 +64,16 @@ export default function RootLayout({
           amiri.variable
         )}
       >
-        <SmoothScroll>
-          <StarField />
-          <CustomCursor />
-          <Noise />
-          {children}
-          <FloatingNote />
-        </SmoothScroll>
+        <LanguageProvider>
+          <SmoothScroll>
+            <StarField />
+            <CustomCursor />
+            <Noise />
+            <LanguageToggle />
+            {children}
+            <FloatingNote />
+          </SmoothScroll>
+        </LanguageProvider>
       </body>
     </html>
   );

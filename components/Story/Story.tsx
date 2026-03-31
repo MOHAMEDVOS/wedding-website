@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLang } from "@/components/providers/language-context";
 
 export default function Story() {
+    const { isAr } = useLang();
     return (
         <section className="py-32 bg-background relative overflow-hidden">
             {/* Ambient radial glow */}
@@ -35,10 +37,10 @@ export default function Story() {
 
                     <h2
                         className="font-amiri text-2xl md:text-4xl lg:text-5xl text-foreground/90 leading-snug max-w-2xl mx-auto"
-                        dir="rtl"
+                        dir={isAr ? "rtl" : "ltr"}
                         style={{ textShadow: "0 0 40px rgba(212,175,55,0.12)" }}
                     >
-                        احتفالنا من الغروب ٦:٣٠ حتى منتصف الليل ١٢:٠٠
+                        {isAr ? "احتفالنا من الغروب ٦:٣٠ حتى منتصف الليل ١٢:٠٠" : "Our celebration from sunset 6:30 PM until midnight 12:00 AM"}
                     </h2>
 
                     {/* Bottom ornament */}
@@ -111,8 +113,8 @@ export default function Story() {
                         >
                             ٦:٣٠ م
                         </motion.span>
-                        <span className="font-amiri text-xs text-wedding-gold/40 tracking-[0.2em] block" dir="rtl">
-                            الغروب
+                        <span className="font-amiri text-xs text-wedding-gold/40 tracking-[0.2em] block" dir={isAr ? "rtl" : "ltr"}>
+                            {isAr ? "الغروب" : "Sunset"}
                         </span>
                     </div>
 
@@ -164,8 +166,8 @@ export default function Story() {
                         >
                             ١٢:٠٠ ص
                         </motion.span>
-                        <span className="font-amiri text-xs text-wedding-gold/40 tracking-[0.2em] block" dir="rtl">
-                            منتصف الليل
+                        <span className="font-amiri text-xs text-wedding-gold/40 tracking-[0.2em] block" dir={isAr ? "rtl" : "ltr"}>
+                            {isAr ? "منتصف الليل" : "Midnight"}
                         </span>
                     </div>
                 </motion.div>
