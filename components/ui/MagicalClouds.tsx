@@ -6,12 +6,15 @@ import { motion, useMotionValue, useTransform } from "framer-motion";
 export default function MagicalClouds() {
   const scrollY = useMotionValue(0);
   const [vh, setVh] = useState(600);
+  const [vw, setVw] = useState(400);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const h = window.innerHeight;
+    const w = window.innerWidth;
     setVh(h);
-    setIsMobile(window.innerWidth < 768);
+    setVw(w);
+    setIsMobile(w < 768);
     const onScroll = () => scrollY.set(window.scrollY);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -24,15 +27,15 @@ export default function MagicalClouds() {
   const opacity = useTransform(progress, [0, 0.78, 1], [1, 1, 0]);
 
   // ── MOBILE transforms (only 2 layers + 1 centre)
-  const mLX = useTransform(progress, [0, 1], [0, -window.innerWidth * 1.1]);
-  const mRX = useTransform(progress, [0, 1], [0,  window.innerWidth * 1.1]);
+  const mLX = useTransform(progress, [0, 1], [0, -vw * 1.1]);
+  const mRX = useTransform(progress, [0, 1], [0,  vw * 1.1]);
   const mCY = useTransform(progress, [0, 1], [0,  vh * 0.55]);
 
   // ── DESKTOP transforms
-  const dLX  = useTransform(progress, [0, 1], [0, -window.innerWidth * 1.15]);
-  const dLX2 = useTransform(progress, [0, 1], [0, -window.innerWidth * 0.95]);
-  const dRX  = useTransform(progress, [0, 1], [0,  window.innerWidth * 1.15]);
-  const dRX2 = useTransform(progress, [0, 1], [0,  window.innerWidth * 0.95]);
+  const dLX  = useTransform(progress, [0, 1], [0, -vw * 1.15]);
+  const dLX2 = useTransform(progress, [0, 1], [0, -vw * 0.95]);
+  const dRX  = useTransform(progress, [0, 1], [0,  vw * 1.15]);
+  const dRX2 = useTransform(progress, [0, 1], [0,  vw * 0.95]);
   const dCY  = useTransform(progress, [0, 1], [0,  vh * 0.65]);
 
   const rayOpacity = useTransform(progress, [0.2, 0.48, 0.78], [0, 0.8, 0]);
